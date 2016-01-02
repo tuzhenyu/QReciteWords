@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    >
+
+
+        <TextView
+            android:id="@+id/librayText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="六级"
+            android:textSize="24sp"
+            android:layout_margin="8dp"
+            />
+
+        <TextView
+            android:id="@+id/words_group_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="词组"
+            android:layout_margin="8dp"
+            />
+
+    <RadioGroup
+        android:id="@+id/groupsRadio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/not_recite_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="未读"
+            android:layout_margin="8dp"
+            />
+
+        <RadioButton
+            android:id="@+id/words_good_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="很熟悉"
+            android:layout_margin="8dp"
+            />
+
+        <RadioButton
+            android:id="@+id/words_not_good_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="不熟悉"
+            android:layout_margin="8dp"
+            />
+
+        <RadioButton
+            android:id="@+id/words_worst_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="很不熟悉"
+            android:layout_margin="8dp"
+            />
+
+    </RadioGroup>
+
+<Button
+    android:id="@+id/bn_startRecite"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="开始吧"
+    />
+
+</LinearLayout>

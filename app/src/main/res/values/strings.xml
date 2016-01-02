@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">QReciteWords</string>
+
+    <string name="title_library">词库</string>
+    <string name="title_personal">个人中心</string>
+    <string name="title_learn">多学点</string>
+    <string name="title_words">背单词啦</string>
+    <string name="title_setting">设置中心</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string-array name="drawitem_sting_array">
+        <item>词库</item>
+        <item>个人中心</item>
+        <item>设置</item>
+        <item>学习小区</item>
+
+    </string-array>
+</resources>
