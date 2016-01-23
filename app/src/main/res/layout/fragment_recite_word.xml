@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     >
 
 
+    <!--
         <TextView
             android:id="@+id/librayText"
             android:layout_width="wrap_content"
@@ -67,6 +67,71 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="开始吧"
-    />
+    />-->
 
+    <RelativeLayout
+        android:layout_marginTop="148dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="很熟悉了"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_alignParentLeft="true"
+            />
+
+        <Button
+            android:text="不太熟悉"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_centerHorizontal="true"
+            />
+
+        <Button
+            android:text="很不熟"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:text="单词：Computer"
+        android:textSize="42sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:background="@android:color/black"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"/>
+
+    <TextView
+        android:text="注释："
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:text="計算機; 计算机,电子计算机; 电子计算机;"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="24sp"
+        />
+
+    <TextView
+        android:text="还剩下 79/100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        />
 </LinearLayout>

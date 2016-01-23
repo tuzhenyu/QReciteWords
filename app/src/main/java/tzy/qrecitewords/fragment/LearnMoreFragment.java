@@ -6,13 +6,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.Arrays;
+import java.util.List;
 
 import tzy.qrecitewords.R;
 
 /**
  * Created by tzy on 2016/1/1.
  */
-public class LearnMoreFragment extends Fragment {
+public class LearnMoreFragment extends BaseFragment {
+
+    ListView listView;
 
     public LearnMoreFragment() {
         super();
@@ -26,6 +33,7 @@ public class LearnMoreFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(getString(R.string.title_learn));
     }
 
     @Nullable
@@ -39,6 +47,15 @@ public class LearnMoreFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        listView = (ListView)view.findViewById(R.id.listView);
+
+        String[] ss = new String[]{"books","blue","broot","building","brrath"};
+
+        List<String> stringList = Arrays.asList(ss);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this.getActivity(), R.layout.text_layout,stringList);
+
+        listView.setAdapter(arrayAdapter);
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
+import tzy.qrecitewords.fragment.BaseFragment;
 import tzy.qrecitewords.fragment.LearnMoreFragment;
 import tzy.qrecitewords.fragment.LibraryFragment;
 import tzy.qrecitewords.fragment.PersonFragment;
@@ -22,7 +23,7 @@ import tzy.qrecitewords.fragment.SettingFragment;
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    Fragment[] fragments = {
+    BaseFragment[] fragments = {
             new ReciteWordsFragments(),
             new LibraryFragment(),
             new LearnMoreFragment(),
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity
             new SettingFragment()
     };
 
+    String[] titles = new String[]{"背单词","词库","多学点","个人中心","设置中心"};
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -64,11 +66,13 @@ public class MainActivity extends AppCompatActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        Fragment fragment = fragments[position];
+        BaseFragment fragment = fragments[position];
 
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
+
+        mTitle = titles[position];
     }
 
     public void onSectionAttached(int number) {
@@ -90,12 +94,12 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
 
-        setTitle(mTitle);
+       // setTitle(mTitle);
     }
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
-       // actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
