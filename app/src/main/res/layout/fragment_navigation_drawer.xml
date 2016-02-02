@@ -7,4 +7,5 @@
     android:dividerHeight="0dp"
     android:background="#cccc"
     tools:context=".NavigationDrawerFragment"
+    android:listSelector="@android:color/holo_blue_light"
     />
