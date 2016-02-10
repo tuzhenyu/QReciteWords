@@ -25,20 +25,17 @@ import tzy.qrecitewords.fragment.SettingFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+    /**
+     * The fragment argument representing the section number for this
+     * fragment.
+     */
+    public static final String ARG_SECTION_NUMBER = "section_number";
 
     private Toolbar mToolbar;// toolbar
 
     private DrawerLayout drawerLayout;
 
     private ActionBarDrawerToggle mActionBarDrawerToggle;
-
-    BaseFragment[] fragments = {
-            new ReciteWordsFragments(),
-            new LibraryFragment(),
-            new LearnMoreFragment(),
-            new PersonFragment(),
-            new SettingFragment()
-    };
 
     String[] titles = new String[]{"背单词","词库","多学点","个人中心","设置中心"};
 
@@ -49,31 +46,31 @@ public class MainActivity extends AppCompatActivity
 
     private CharSequence mTitle;
 
-    Fragment fragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        mNavigationDrawerFragment = (NavigationDrawerFragment)
+                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+
+        mNavigationDrawerFragment.setUp(
+                R.id.navigation_drawer,
+                drawerLayout);
+
         mTitle = getTitle();
 
         initToolBar();
+
         onNavigationDrawerItemSelected(0);
     }
 
     /**
      * 为页面加载初始状态的fragment
      */
-    public void initFragment(Bundle savedInstanceState)
-    {
-        //判断activity是否重建，如果不是，则不需要重新建立fragment.
-        if(savedInstanceState==null) {
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.navigation_drawer, fragments[0]).commit();
-        }
+    public void initFragment(Bundle savedInstanceState) {
+
     }
 
     /**
@@ -107,37 +104,66 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        BaseFragment fragment = null;
+        String tag = null;
+        switch(position) {
+            case 0:
+                fragment = (BaseFragment) fm.findFragmentByTag(ReciteWordsFragments.TAG);
+        if(fragment == null)
+            fragment = ReciteWordsFragments.newInstance(0);
+                tag = ReciteWordsFragments.TAG;
+                break;
+            case 1:
+                fragment = (BaseFragment) fm.findFragmentByTag(LibraryFragment.TAG);
+                if(fragment == null)
+                    fragment = LibraryFragment.newInstance(1);
+                tag = LibraryFragment.TAG;
+                break;
+            case 2:
+                fragment = (BaseFragment) fm.findFragmentByTag(LearnMoreFragment.TAG);
+                if(fragment == null)
+                    fragment = LearnMoreFragment.newInstance(2);
+                tag = LearnMoreFragment.TAG;
+                break;
+            case 3:
+                fragment = (BaseFragment) fm.findFragmentByTag(PersonFragment.TAG);
+                if(fragment == null)
+                    fragment = PersonFragment.newInstance(3);
+                tag = PersonFragment.TAG;
+                break;
+            case 4:
+                fragment = (BaseFragment) fm.findFragmentByTag(SettingFragment.TAG);
+                if(fragment == null)
+                    fragment = SettingFragment.newInstance(4);
+                tag = SettingFragment.TAG;
+                break;
+        }
 
-        BaseFragment fragment = fragments[position];
-
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit();
-
-        mTitle = titles[position];
+        ft.replace(R.id.container, fragment, tag).commit();
     }
 
     public void onSectionAttached(int number) {
         switch (number) {
-            case 1:
+            case 0:
                 mTitle = getString(R.string.title_words);
                 break;
-            case 2:
+            case 1:
                 mTitle = getString(R.string.title_library);
                 break;
-            case 3:
+            case 2:
                 mTitle = getString(R.string.title_learn);
                 break;
-            case 4:
+            case 3:
                 mTitle = getString(R.string.title_personal);
                 break;
-            case 5:
+            case 4:
                 mTitle = getString(R.string.title_setting);
                 break;
         }
 
-       // setTitle(mTitle);
+        mToolbar.setTitle(mTitle);
     }
 
     @Override
@@ -160,47 +186,5 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
-    }
-
-
 
 }

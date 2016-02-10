@@ -12,15 +12,6 @@ import android.view.ViewGroup;
  */
 public abstract class BaseFragment extends Fragment {
     protected View mRootView;
-    String title;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
