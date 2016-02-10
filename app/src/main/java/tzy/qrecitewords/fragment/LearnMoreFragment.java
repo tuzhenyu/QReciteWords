@@ -36,14 +36,6 @@ public class LearnMoreFragment extends BaseFragment {
         setTitle(getString(R.string.title_learn));
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        return  inflater.inflate(R.layout.fragment_learn,container,false);
-
-    }
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -56,6 +48,16 @@ public class LearnMoreFragment extends BaseFragment {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this.getActivity(), R.layout.text_layout,stringList);
 
         listView.setAdapter(arrayAdapter);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_learn;
+    }
+
+    @Override
+    protected void afterCreate(Bundle savedInstanceState) {
+
     }
 
     @Override

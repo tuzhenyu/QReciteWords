@@ -36,12 +36,6 @@ public class SettingFragment extends BaseFragment {
         setTitle(getString(R.string.title_setting));
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return  inflater.inflate(R.layout.fragment_setting, container, false);
-    }
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -55,6 +49,16 @@ public class SettingFragment extends BaseFragment {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this.getActivity(), R.layout.text_layout,stringList);
 
         listView.setAdapter(arrayAdapter);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_setting;
+    }
+
+    @Override
+    protected void afterCreate(Bundle savedInstanceState) {
+
     }
 
     @Override

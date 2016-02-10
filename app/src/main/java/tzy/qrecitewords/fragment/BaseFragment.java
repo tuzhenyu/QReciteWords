@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 /**
  * Created by tzy on 2016/1/7.
  */
-public class BaseFragment extends Fragment {
-
+public abstract class BaseFragment extends Fragment {
+    protected View mRootView;
     String title;
 
     public String getTitle() {
@@ -23,11 +23,6 @@ public class BaseFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -35,13 +30,26 @@ public class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        if(null == mRootView){
+            mRootView = inflater.inflate(getLayoutId(), container, false);
+        }
+        return mRootView;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        afterCreate(savedInstanceState);
+    }
+
+    protected abstract int getLayoutId();
+
+    protected abstract void afterCreate(Bundle savedInstanceState);
 
     @Override
     public void onDestroyView() {
