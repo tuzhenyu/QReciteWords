@@ -1,8 +1,20 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="AppTheme.Base">
+    <style name="AppTheme.light" parent="AppTheme.Base">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">@android:color/holo_blue_light</item>
+        <item name="colorPrimaryDark">@android:color/holo_blue_light</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="AppTheme.drak" parent="AppTheme.Base">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@android:color/holo_blue_light</item>
+        <item name="colorPrimaryDark">@android:color/holo_blue_light</item>
+        <item name="android:windowBackground">@color/gray</item>
+        <item name="android:textColor">@color/white</item>
     </style>
     <!-- the theme applied to the application or activity -->
     <style name="AppTheme.Base" parent="Theme.AppCompat">
@@ -11,7 +23,6 @@
         <!-- 使用 API Level 22 編譯的話，要拿掉前綴字 -->
         <item name="windowNoTitle">true</item>
 
-        <item name="colorPrimary">@android:color/holo_blue_light</item>
-        <item name="colorPrimaryDark">@android:color/holo_blue_light</item>
+
     </style>
 </resources>
