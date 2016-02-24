@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    tools:context="com.example.mytoolbar_04.MainActivity" >
+    tools:context="com.tzy.mytoolbar_04.MainActivity" >
 
     <include
         layout="@layout/toolsbar"
