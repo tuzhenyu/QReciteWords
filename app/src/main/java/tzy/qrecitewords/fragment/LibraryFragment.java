@@ -1,25 +1,32 @@
 package tzy.qrecitewords.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
+import tzy.qrecitewords.LibraryWordsActivity;
 import tzy.qrecitewords.MainActivity;
 import tzy.qrecitewords.R;
+import tzy.qrecitewords.adapter.LibrarysAdapter;
+import tzy.qrecitewords.javabean.Library;
 
 /**
  * Created by tzy on 2016/1/1.
  */
-public class LibraryFragment extends BaseFragment {
+public class LibraryFragment extends BaseFragment implements AdapterView.OnItemClickListener{
 
     public static final String TAG = LibraryFragment.class.getSimpleName();
 
@@ -52,9 +59,16 @@ public class LibraryFragment extends BaseFragment {
 
         List<String> stringList = Arrays.asList(ss);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this.getActivity(), R.layout.text_layout,stringList);
+        List<Library> libraries = new LinkedList<>();
 
-        listView.setAdapter(arrayAdapter);
+        for(String libraryName: stringList){
+            libraries.add(new Library(libraryName));
+        }
+
+        LibrarysAdapter librarysAdapter = new LibrarysAdapter(libraries,this.getActivity());
+
+        listView.setAdapter(librarysAdapter);
+        listView.setOnItemClickListener(this);
 
     }
 
@@ -115,5 +129,14 @@ public class LibraryFragment extends BaseFragment {
         args.putInt(MainActivity.ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        Intent intent = new Intent(this.getActivity(), LibraryWordsActivity.class);
+        startActivity(intent);
+       // this.getActivity().overridePendingTransition(R.anim.activity_in_anim,R.anim.activity_out_anim);
+        this.getActivity().overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 }

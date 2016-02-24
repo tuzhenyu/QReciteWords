@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
 
-    <!--<ListView
-        android:id="@+id/libraries_listview"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        >
-    </ListView>-->
-
+    >
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="fill_parent"
+        android:choiceMode="singleChoice"
+        android:dividerHeight="8dp"
+        android:padding="8dp"
+        android:background="@color/whitesmoke"
+        />
 
 </LinearLayout>

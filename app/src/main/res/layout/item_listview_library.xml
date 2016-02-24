@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tzy.qrecitewords.widget.CheckableLibraryItem
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    cardview:cardElevation="2dp"
+    cardview:cardCornerRadius="2dp"
+    >
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:duplicateParentState="true"
+    >
+    <TextView
+        android:id="@+id/textView_libraryName"
+        android:duplicateParentState="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="四级词库"
+        android:textSize="28sp"
+        android:textColor="@drawable/selector_library_text_item"
+        />
+
+    <ImageView
+        android:id="@+id/imageView_selector_icon"
+        android:duplicateParentState="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/selector_icon1"
+        />
+</RelativeLayout>
+</tzy.qrecitewords.widget.CheckableLibraryItem>
