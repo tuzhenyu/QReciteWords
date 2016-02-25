@@ -1,26 +1,17 @@
 package tzy.qrecitewords.fragment;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.melnykov.fab.FloatingActionButton;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import tzy.qrecitewords.LibraryWordsActivity;
 import tzy.qrecitewords.MainActivity;
 import tzy.qrecitewords.R;
 import tzy.qrecitewords.adapter.LibrarysAdapter;
@@ -33,7 +24,11 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
 
     public static final String TAG = LibraryFragment.class.getSimpleName();
 
+    LibrarysAdapter librarysAdapter;
+
     ListView listView;
+
+    FloatingActionButton floatingActionButton;
 
     public LibraryFragment() {
         super();
@@ -54,6 +49,7 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
         listView = (ListView) view.findViewById(R.id.listView);
 
         String[] ss = new String[]{"四级", "六级", "雅思", "托福", "六年级英语", "高中英语", "初中英语", "小学英语"};
@@ -66,15 +62,11 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
             libraries.add(new Library(libraryName));
         }
 
-        LibrarysAdapter librarysAdapter = new LibrarysAdapter(libraries, this.getActivity());
+        librarysAdapter = new LibrarysAdapter(libraries, this.getActivity());
 
         listView.setAdapter(librarysAdapter);
         listView.setOnItemClickListener(this);
-
-       if(listView.getFooterViewsCount() == 0){
-           View footer = this.getLayoutInflater(savedInstanceState).inflate(R.layout.listview_footer,null);
-           listView.addFooterView(footer);
-       }
+        floatingActionButton.attachToListView(listView);
 
     }
 
@@ -139,9 +131,6 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        ListView listView = (ListView) parent;
-        BaseAdapter adapter = (BaseAdapter) listView.getAdapter();
-        adapter.notifyDataSetChanged();
+        librarysAdapter.notifyDataSetChanged();//刷新界面
     }
 }
