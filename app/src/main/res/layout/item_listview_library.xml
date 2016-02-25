@@ -12,6 +12,7 @@
     android:layout_height="wrap_content"
     android:padding="16dp"
     android:duplicateParentState="true"
+
     >
     <TextView
         android:id="@+id/textView_libraryName"
@@ -21,16 +22,19 @@
         android:layout_alignParentLeft="true"
         android:text="四级词库"
         android:textSize="28sp"
+        android:layout_centerVertical="true"
         android:textColor="@drawable/selector_library_text_item"
         />
 
-    <ImageView
+    <TextView
         android:id="@+id/imageView_selector_icon"
         android:duplicateParentState="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:src="@drawable/selector_icon1"
+        android:layout_centerVertical="true"
+        android:textSize="24sp"
+        android:textColor="@color/lightblue"
         />
 </RelativeLayout>
 </tzy.qrecitewords.widget.CheckableLibraryItem>

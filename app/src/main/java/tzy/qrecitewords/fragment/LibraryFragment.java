@@ -8,9 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +29,7 @@ import tzy.qrecitewords.javabean.Library;
 /**
  * Created by tzy on 2016/1/1.
  */
-public class LibraryFragment extends BaseFragment implements AdapterView.OnItemClickListener{
+public class LibraryFragment extends BaseFragment implements AdapterView.OnItemClickListener {
 
     public static final String TAG = LibraryFragment.class.getSimpleName();
 
@@ -51,24 +54,27 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        listView = (ListView) view.findViewById(R.id.listView);
 
-
-        listView = (ListView)view.findViewById(R.id.listView);
-
-        String[] ss = new String[]{"四级","六级","雅思","托福","六年级英语","高中英语"};
+        String[] ss = new String[]{"四级", "六级", "雅思", "托福", "六年级英语", "高中英语", "初中英语", "小学英语"};
 
         List<String> stringList = Arrays.asList(ss);
 
         List<Library> libraries = new LinkedList<>();
 
-        for(String libraryName: stringList){
+        for (String libraryName : stringList) {
             libraries.add(new Library(libraryName));
         }
 
-        LibrarysAdapter librarysAdapter = new LibrarysAdapter(libraries,this.getActivity());
+        LibrarysAdapter librarysAdapter = new LibrarysAdapter(libraries, this.getActivity());
 
         listView.setAdapter(librarysAdapter);
         listView.setOnItemClickListener(this);
+
+       if(listView.getFooterViewsCount() == 0){
+           View footer = this.getLayoutInflater(savedInstanceState).inflate(R.layout.listview_footer,null);
+           listView.addFooterView(footer);
+       }
 
     }
 
@@ -134,9 +140,8 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        Intent intent = new Intent(this.getActivity(), LibraryWordsActivity.class);
-        startActivity(intent);
-       // this.getActivity().overridePendingTransition(R.anim.activity_in_anim,R.anim.activity_out_anim);
-        this.getActivity().overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        ListView listView = (ListView) parent;
+        BaseAdapter adapter = (BaseAdapter) listView.getAdapter();
+        adapter.notifyDataSetChanged();
     }
 }
