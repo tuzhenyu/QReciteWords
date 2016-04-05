@@ -1,1 +1,1 @@
-include ':app', ':wordsdao'
+include ':app', ':wordsdao', ':tapbarmenu'

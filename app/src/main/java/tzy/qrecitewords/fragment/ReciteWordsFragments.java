@@ -94,8 +94,8 @@ public class ReciteWordsFragments extends BaseFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        ((MainActivity) activity).onSectionAttached(
-                getArguments().getInt(MainActivity.ARG_SECTION_NUMBER));
+       /* ((MainActivity) activity).onSectionAttached(
+                getArguments().getInt(MainActivity.ARG_SECTION_NUMBER));*/
     }
 
 }

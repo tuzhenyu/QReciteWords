@@ -1,6 +1,6 @@
 <!-- A DrawerLayout is intended to be used as the top-level content view using match_parent for both width and height to consume the full space available. -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,4 +27,75 @@
         tools:layout="@layout/fragment_navigation_drawer" />
 
 </android.support.v4.widget.DrawerLayout>
-</LinearLayout>
+</LinearLayout>-->
+
+ <FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context="com.tzy.mytoolbar_04.MainActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <tzy.tapbarmenu.TapBarMenu
+        android:id="@+id/tapBarMenu"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="24dp"
+        app:tbm_backgroundColor="@color/red"
+        app:tbm_menuAnchor="bottom"
+        >
+
+        <ImageView
+            android:id="@+id/item1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/ic_person"
+            tools:visibility="visible"
+            />
+
+        <ImageView
+            android:id="@+id/item2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/ic_location"
+            />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:id="@+id/item3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/ic_thumb_up"
+            />
+
+        <ImageView
+            android:id="@+id/item4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/ic_thumb_down"
+            />
+    </tzy.tapbarmenu.TapBarMenu>
+
+</FrameLayout>

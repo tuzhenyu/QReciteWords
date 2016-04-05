@@ -6,12 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.ImageView;
+
 
 import tzy.qrecitewords.fragment.BaseFragment;
 import tzy.qrecitewords.fragment.LearnMoreFragment;
@@ -19,20 +22,26 @@ import tzy.qrecitewords.fragment.LibraryFragment;
 import tzy.qrecitewords.fragment.PersonFragment;
 import tzy.qrecitewords.fragment.ReciteWordsFragments;
 import tzy.qrecitewords.fragment.SettingFragment;
+import tzy.tapbarmenu.TapBarMenu;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements View.OnClickListener {
     /**
      * The fragment argument representing the section number for this
      * fragment.
      */
     public static final String ARG_SECTION_NUMBER = "section_number";
 
-    private Toolbar mToolbar;// toolbar
+    //private Toolbar mToolbar;// toolbar
 
-    private DrawerLayout drawerLayout;
+   // private DrawerLayout drawerLayout;
 
-    private ActionBarDrawerToggle mActionBarDrawerToggle;
+    private TapBarMenu tapBarMenu;
+
+    ImageView imageViewPersonal,imageViewSetting,imageViewLibrary,imageViewMore;
+
+
+    //private ActionBarDrawerToggle mActionBarDrawerToggle;
 
     String[] titles = new String[]{"背单词","词库","多学点","个人中心","设置中心"};
 
@@ -47,20 +56,27 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        tapBarMenu = (TapBarMenu) findViewById(R.id.tapBarMenu);
+        tapBarMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tapBarMenu.toggle();
+            }
+        });
+       // drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+      //  mNavigationDrawerFragment = (NavigationDrawerFragment)
+        //        getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
 
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                drawerLayout);
+       // mNavigationDrawerFragment.setUp(
+         //       R.id.navigation_drawer,
+          //      drawerLayout);
 
-        mTitle = getTitle();
+       // mTitle = getTitle();
 
-        initToolBar();
+       // initToolBar();
 
-        onNavigationDrawerItemSelected(0);
+       // onNavigationDrawerItemSelected(0);
     }
 
     /**
@@ -73,7 +89,7 @@ public class MainActivity extends AppCompatActivity
     /**
      * 初始化ToolBar
      */
-    private void initToolBar()
+   /* private void initToolBar()
     {
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -96,9 +112,9 @@ public class MainActivity extends AppCompatActivity
         drawerLayout.setDrawerListener(mActionBarDrawerToggle);
 
 
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fm = getSupportFragmentManager();
@@ -138,10 +154,10 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
 
-        ft.replace(R.id.container, fragment, tag).commit();
-    }
+       // ft.replace(R.id.container, fragment, tag).commit();
+    }*/
 
-    public void onSectionAttached(int number) {
+    /*public void onSectionAttached(int number) {
         switch (number) {
             case 0:
                 mTitle = getString(R.string.title_words);
@@ -161,7 +177,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         mToolbar.setTitle(mTitle);
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -184,4 +200,22 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.item1:
+                Log.i("TAG", "Item 1 selected");
+                break;
+            case R.id.item2:
+                Log.i("TAG", "Item 2 selected");
+                break;
+            case R.id.item3:
+                Log.i("TAG", "Item 3 selected");
+                break;
+            case R.id.item4:
+                Log.i("TAG", "Item 4 selected");
+                break;
+        }
+        tapBarMenu.close();
+    }
 }
