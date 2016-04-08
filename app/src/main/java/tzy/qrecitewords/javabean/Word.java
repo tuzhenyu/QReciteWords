@@ -15,6 +15,9 @@ public class Word {
     String paraphrase;
     /**熟悉程度 0代表熟悉；1代表不熟悉；2代表很不熟悉*/
     int familiarity;
+    /**最后阅读时间*/
+    long lastReadTime ;
+
     public String getWord() {
         return word;
     }
@@ -53,5 +56,13 @@ public class Word {
 
     public void setFamiliarity(int familiarity) {
         this.familiarity = familiarity;
+    }
+
+    public long getLastReadTime() {
+        return lastReadTime;
+    }
+
+    public void setLastReadTime(long lastReadTime) {
+        this.lastReadTime = lastReadTime;
     }
 }
