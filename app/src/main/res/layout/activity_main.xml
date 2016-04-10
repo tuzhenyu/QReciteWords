@@ -29,7 +29,7 @@
 </android.support.v4.widget.DrawerLayout>
 </LinearLayout>-->
 
- <FrameLayout
+ <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -40,7 +40,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-    <tzy.tapbarmenu.TapBarMenu
+    <!--<tzy.tapbarmenu.TapBarMenu
         android:id="@+id/tapBarMenu"
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -96,6 +96,21 @@
             android:paddingBottom="10dp"
             android:src="@drawable/ic_thumb_down"
             />
-    </tzy.tapbarmenu.TapBarMenu>
+    </tzy.tapbarmenu.TapBarMenu>-->
 
-</FrameLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="#FF00FF00"
+        app:tabSelectedTextColor="#FF00FF00"
+        app:tabTextColor="#FF000000"
+        app:tabMode="scrollable"
+        app:tabGravity="center"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

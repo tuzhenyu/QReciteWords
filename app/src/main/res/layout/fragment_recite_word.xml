@@ -1,138 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<LinearLayout
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
     >
 
-
-    <!--
-        <TextView
-            android:id="@+id/librayText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="六级"
-            android:textSize="24sp"
-            android:layout_margin="8dp"
-            />
-
-        <TextView
-            android:id="@+id/words_group_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="词组"
-            android:layout_margin="8dp"
-            />
-
-    <RadioGroup
-        android:id="@+id/groupsRadio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:id="@+id/not_recite_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="未读"
-            android:layout_margin="8dp"
-            />
-
-        <RadioButton
-            android:id="@+id/words_good_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="很熟悉"
-            android:layout_margin="8dp"
-            />
-
-        <RadioButton
-            android:id="@+id/words_not_good_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="不熟悉"
-            android:layout_margin="8dp"
-            />
-
-        <RadioButton
-            android:id="@+id/words_worst_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="很不熟悉"
-            android:layout_margin="8dp"
-            />
-
-    </RadioGroup>
-
-<Button
-    android:id="@+id/bn_startRecite"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="开始吧"
-    />-->
-
-    <RelativeLayout
-        android:layout_marginTop="148dp"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
+    <android.support.v7.widget.CardView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:text="很熟悉了"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_alignParentLeft="true"
-            />
-
-        <Button
-            android:text="不太熟悉"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_centerHorizontal="true"
-            />
-
-        <Button
-            android:text="很不熟"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_alignParentRight="true"
-            />
-    </RelativeLayout>
-
-    <TextView
-        android:text="单词：Computer"
-        android:textSize="42sp"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:padding="16dp"
+        app:cardBackgroundColor="@color/t_seagreen"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="1dp"
+        app:cardElevation="0dp"
+        >
 
-    <View
-        android:background="@android:color/black"
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/tx_libraryName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:text="词库：四级"
+                android:textColor="@color/green"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                />
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_gravity="center_horizontal"
+                >
+
+                <tzy.qrecitewords.widget.WordLableView
+                    android:id="@+id/wlable_noread"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:WordLableNumbg="@drawable/shape_wlable_noread"
+                    app:WordLableTextContent="@string/wlable_noRead"
+                    />
+
+                <tzy.qrecitewords.widget.WordLableView
+                    android:id="@+id/wlable_fam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:WordLableNumbg="@drawable/shape_wlable_fam"
+                    app:WordLableTextContent="@string/wlable_fam"
+                    />
+
+                <tzy.qrecitewords.widget.WordLableView
+                    android:id="@+id/wlable_nofam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:WordLableNumbg="@drawable/shape_wlable_nofam"
+                    app:WordLableTextContent="@string/wlable_nofam"
+                    />
+
+                <tzy.qrecitewords.widget.WordLableView
+                    android:id="@+id/wlable_nokonwn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:WordLableNumbg="@drawable/shape_wlable_unknown"
+                    app:WordLableTextContent="@string/wlable_unknown"
+
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
         android:layout_width="fill_parent"
-        android:layout_height="2dp"/>
-
-    <TextView
-        android:text="注释："
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textSize="18sp"
-        />
+        android:padding="16dp"
+        app:cardBackgroundColor="@color/t_seagreen"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="1dp"
+        app:cardElevation="0dp"
+        >
 
-    <TextView
-        android:text="計算機; 计算机,电子计算机; 电子计算机;"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:textSize="24sp"
-        />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
 
-    <TextView
-        android:text="还剩下 79/100"
-        android:layout_width="wrap_content"
+            <tzy.qrecitewords.widget.WordLableView
+                android:id="@+id/view_todayWord_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:WordLableNumbg="@color/transparent"
+                app:WordLableTextContent="@string/today_words_to_read"
+                app:WordLableTxColor="@color/gray"
+                app:WordLableTxSize="20sp"
+                />
+
+            <tzy.qrecitewords.widget.WordLableView
+                android:id="@+id/view_todayWord_num_completd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:WordLableNumbg="@color/transparent"
+                app:WordLableTextContent="@string/words_today_complete"
+                app:WordLableTxColor="@color/gray"
+                app:WordLableTxSize="20sp"
+                />
+
+            <tzy.qrecitewords.widget.WordLableView
+                android:id="@+id/view_start_read"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:WordLableNumbg="@drawable/shape_word_num"
+                app:WordLableNumText="@string/start_to_read"
+                app:WordLableVisibility="@integer/lable.gone"
+                app:WordLableNumTxSize="20sp"
+                />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        />
+        android:padding="16dp"
+        app:cardBackgroundColor="@color/t_seagreen"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="1dp"
+        app:cardElevation="0dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tx_daily_read"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/gray"
+                android:text="每日一句"
+                android:layout_margin="8dp"
+                android:layout_alignParentLeft="true"
+                />
+
+            <TextView
+                android:id="@+id/view_share2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微信"
+                android:layout_alignParentRight="true"
+                android:layout_margin="8dp"
+                />
+
+            <TextView
+                android:id="@+id/view_share1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微博"
+                android:layout_toLeftOf="@id/view_share2"
+                android:layout_margin="8dp"
+                />
+
+           <View
+               android:id="@+id/line"
+               android:layout_width="fill_parent"
+               android:layout_height="1dp"
+               android:background="@color/t_grey"
+               android:layout_below="@id/tx_daily_read"
+               android:layout_marginBottom="8dp"
+               />
+
+            <TextView
+                android:id="@+id/tx_daily_read_content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="2B or not 2B,is a question."
+                android:textSize="16sp"
+                android:layout_below="@id/line"
+                android:layout_margin="8dp"
+                android:paddingBottom="8dp"
+                />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:cardBackgroundColor="@color/seagreen"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="1dp"
+        app:cardElevation="0dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32sp"
+                android:textColor="@color/white"
+                android:text="单词量测试"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
 </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
