@@ -101,6 +101,7 @@
     <color name="skyblue">#87ceeb</color> <!-- 天蓝色 -->
     <color name="gray">#808080</color> <!-- 灰色 -->
     <color name="grey">#808080</color> <!-- 灰色 -->
+    <color name="t_grey">#22808080</color>
     <color name="olive">#808000</color> <!-- 橄榄色 -->
     <color name="purple">#800080</color> <!-- 紫色 -->
     <color name="maroon">#800000</color> <!-- 粟色 -->
@@ -131,6 +132,7 @@
     <color name="darkslategray">#2f4f4f</color> <!-- 暗瓦灰色 -->
     <color name="darkslategrey">#2f4f4f</color> <!-- 暗瓦灰色 -->
     <color name="seagreen">#2e8b57</color> <!-- 海绿色 -->
+    <color name="t_seagreen">#222e8b57</color>
     <color name="forestgreen">#228b22</color> <!-- 森林绿 -->
     <color name="lightseagreen">#20b2aa</color> <!-- 亮海蓝色 -->
     <color name="dodgerblue">#1e90ff</color> <!-- 闪兰色 -->

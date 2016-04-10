@@ -21,6 +21,14 @@
         <item>个人中心</item>
         <item>设置</item>
         <item>学习小区</item>
-
     </string-array>
+
+    <string name="wlable_noRead">未学习</string>
+    <string name="wlable_fam">熟悉</string>
+    <string name="wlable_nofam">有点陌生</string>
+    <string name="wlable_unknown">没印象</string>
+
+    <string name="today_words_to_read">今日单词</string>
+    <string name="words_today_complete">已完成</string>
+    <string name="start_to_read">开始</string>
 </resources>

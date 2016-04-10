@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WordLableView">
+        <attr name="WordLableTextContent" format="string" />
+        <attr name="WordLableNumText" format="string" />
+        <attr name="WordLableNumbg" format="reference|color" />
+        <attr name="WordLableNumTxColor" format="color"/>
+        <attr name="WordLableNumTxSize" format="dimension"/>
+        <attr name="WordLableTxColor" format="color"/>
+        <attr name="WordLableTxSize" format="dimension"/>
+        <attr name="WordLableVisibility" format="integer"/>
+    </declare-styleable>
+</resources>

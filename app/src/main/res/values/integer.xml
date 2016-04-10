@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="lable.visible">0</integer>
+    <integer name="lable.invisible">1</integer>
+    <integer name="lable.gone">-1</integer>
+</resources>
