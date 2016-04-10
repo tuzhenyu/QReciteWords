@@ -1,6 +1,11 @@
 package tzy.qrecitewords;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +21,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ImageView;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
 import tzy.qrecitewords.fragment.BaseFragment;
 import tzy.qrecitewords.fragment.LearnMoreFragment;
 import tzy.qrecitewords.fragment.LibraryFragment;
@@ -26,6 +37,12 @@ import tzy.tapbarmenu.TapBarMenu;
 
 public class MainActivity extends AppCompatActivity
         implements View.OnClickListener {
+
+    private TabLayout mTabLayout;
+
+    private ViewPager mViewPager;
+
+    FragmentPagerAdapter pagerAdapter;
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -36,7 +53,7 @@ public class MainActivity extends AppCompatActivity
 
    // private DrawerLayout drawerLayout;
 
-    private TapBarMenu tapBarMenu;
+    //private TapBarMenu tapBarMenu;
 
     ImageView imageViewPersonal,imageViewSetting,imageViewLibrary,imageViewMore;
 
@@ -45,24 +62,48 @@ public class MainActivity extends AppCompatActivity
 
     String[] titles = new String[]{"背单词","词库","多学点","个人中心","设置中心"};
 
+    List<String> mTitleList = new ArrayList();
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+   // private NavigationDrawerFragment mNavigationDrawerFragment;
 
     private CharSequence mTitle;
+
+    List<BaseFragment> baseFragments =new  ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tapBarMenu = (TapBarMenu) findViewById(R.id.tapBarMenu);
-        tapBarMenu.setOnClickListener(new View.OnClickListener() {
+
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+
+        mTabLayout = (TabLayout) findViewById(R.id.tl);
+
+        baseFragments.add(ReciteWordsFragments.newInstance(0));
+        baseFragments.add(LibraryFragment.newInstance(1));
+        baseFragments.add(SettingFragment.newInstance(2));
+
+        mTabLayout.addTab(mTabLayout.newTab().setText("背单词"));//添加tab选项卡
+        mTabLayout.addTab(mTabLayout.newTab().setText("词库"));
+        mTabLayout.addTab(mTabLayout.newTab().setText("设置中心"));
+
+        mTitleList.add("背单词");
+        mTitleList.add("词库");
+        mTitleList.add("设置中心");
+
+        pagerAdapter =new  WordViewPagerAdapter(getSupportFragmentManager(),baseFragments);
+        mViewPager.setAdapter(pagerAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);//将TabLayout和ViewPager关联起来
+        mTabLayout.setTabsFromPagerAdapter(pagerAdapter);//给Tabs设置适配器
+        // tapBarMenu = (TapBarMenu) findViewById(R.id.tapBarMenu);
+       /* tapBarMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tapBarMenu.toggle();
             }
-        });
+        });*/
        // drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
       //  mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -202,7 +243,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        /*switch(v.getId()){
             case R.id.item1:
                 Log.i("TAG", "Item 1 selected");
                 break;
@@ -215,7 +256,38 @@ public class MainActivity extends AppCompatActivity
             case R.id.item4:
                 Log.i("TAG", "Item 4 selected");
                 break;
+        }*/
+       // tapBarMenu.close();
+    }
+
+    class WordViewPagerAdapter extends FragmentPagerAdapter{
+
+        List<BaseFragment> fragments ;
+
+        public WordViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+            fragments = new ArrayList<BaseFragment>();
         }
-        tapBarMenu.close();
+
+        public WordViewPagerAdapter(FragmentManager fm,List<BaseFragment> fragments) {
+            super(fm);
+            this.fragments = fragments;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+
+            return mTitleList.get(position);
+        }
     }
 }
