@@ -112,4 +112,9 @@ public class PersonFragment extends BaseFragment {
         /*((MainActivity) activity).onSectionAttached(
                 getArguments().getInt(MainActivity.ARG_SECTION_NUMBER));*/
     }
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

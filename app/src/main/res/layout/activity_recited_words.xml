@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/khaki"
+    >
+
+    <LinearLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="18sp"
+            android:text="返回"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:background="@drawable/shape_white_rectangle"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="18sp"
+            android:layout_weight="1.0"
+            android:text="@string/word_lable_fam"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:background="@drawable/shape_white_rectangle"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="18sp"
+            android:text="@string/word_lable_nofam"
+            android:layout_weight="1.0"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:background="@drawable/shape_white_rectangle"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="18sp"
+            android:text="@string/word_lable_unknown"
+            android:layout_weight="1.0"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textColor="@color/white"
+            android:background="@drawable/shape_white_rectangle"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/chose_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="320dp"
+        android:orientation="vertical"
+        android:layout_above="@id/bottom_layout"
+        >
+
+        <include layout="@layout/line_layout" />
+
+        <TextView
+            android:id="@+id/tx_choseA"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textSize="18sp"
+            android:textColor="@color/green"
+            android:text="选项A。。。。。。。"
+            android:layout_weight="1.0"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:paddingLeft="16dp"
+            />
+
+        <TextView
+            android:id="@+id/tx_choseB"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textSize="18sp"
+            android:textColor="@color/green"
+            android:text="选项A。。。。。。。"
+            android:layout_weight="1.0"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:paddingLeft="16dp"
+            />
+
+        <TextView
+            android:id="@+id/tx_choseC"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textSize="18sp"
+            android:textColor="@color/green"
+            android:text="选项A。。。。。。。"
+            android:layout_weight="1.0"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:paddingLeft="16dp"
+            />
+
+        <TextView
+            android:id="@+id/tx_choseD"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textSize="18sp"
+            android:textColor="@color/green"
+            android:text="选项A。。。。。。。"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_weight="1.0"
+            android:paddingLeft="16dp"
+            />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tx_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="34sp"
+        android:textColor="@color/yellow"
+        android:textStyle="bold"
+        android:text="Chinese"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/chose_layout"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        />
+
+</RelativeLayout>

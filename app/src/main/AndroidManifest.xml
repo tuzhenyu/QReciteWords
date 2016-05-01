@@ -21,6 +21,8 @@
 
         <activity android:name=".LibraryWordsActivity">
         </activity>
+
+        <activity android:name=".widget.ReciteWordsActivity"></activity>
     </application>
 
 </manifest>

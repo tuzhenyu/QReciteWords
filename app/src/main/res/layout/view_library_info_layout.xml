@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/tx_libraryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:text="词库：四级"
+        android:textColor="@color/green"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        />
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <tzy.qrecitewords.widget.WordLableView
+            android:id="@+id/wlable_noread"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:WordLableNumbg="@drawable/shape_wlable_noread"
+            app:WordLableTextContent="@string/wlable_noRead"
+            />
+
+        <tzy.qrecitewords.widget.WordLableView
+            android:id="@+id/wlable_fam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:WordLableNumbg="@drawable/shape_wlable_fam"
+            app:WordLableTextContent="@string/wlable_fam"
+            />
+
+        <tzy.qrecitewords.widget.WordLableView
+            android:id="@+id/wlable_nofam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:WordLableNumbg="@drawable/shape_wlable_nofam"
+            app:WordLableTextContent="@string/wlable_nofam"
+            />
+
+        <tzy.qrecitewords.widget.WordLableView
+            android:id="@+id/wlable_nokonwn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:WordLableNumbg="@drawable/shape_wlable_unknown"
+            app:WordLableTextContent="@string/wlable_unknown"
+
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

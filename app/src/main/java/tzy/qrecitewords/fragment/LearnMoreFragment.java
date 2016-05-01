@@ -109,4 +109,9 @@ public class LearnMoreFragment extends BaseFragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

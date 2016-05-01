@@ -149,4 +149,8 @@ public class WordLableView extends LinearLayout {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
     }
+
+    public void setTxNumOnClickLisenter(View.OnClickListener clickLisenter){
+
+    }
 }

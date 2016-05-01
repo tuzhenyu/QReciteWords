@@ -31,4 +31,8 @@
     <string name="today_words_to_read">今日单词</string>
     <string name="words_today_complete">已完成</string>
     <string name="start_to_read">开始</string>
+
+    <string name="word_lable_fam">很熟悉</string>
+    <string name="word_lable_nofam">不熟悉</string>
+    <string name="word_lable_unknown">很陌生</string>
 </resources>

@@ -133,4 +133,9 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         librarysAdapter.notifyDataSetChanged();//刷新界面
     }
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

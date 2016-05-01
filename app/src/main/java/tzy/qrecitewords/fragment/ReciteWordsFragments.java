@@ -7,16 +7,23 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import tzy.qrecitewords.MainActivity;
 import tzy.qrecitewords.R;
+import tzy.qrecitewords.utils.IntentManager;
+import tzy.qrecitewords.widget.LibraryInfoView;
 
 /**
  * Created by tzy on 2016/1/1.
  */
-public class ReciteWordsFragments extends BaseFragment {
+public class ReciteWordsFragments extends BaseFragment  {
 
     public static final String TAG = ReciteWordsFragments.class.getSimpleName();
+
+    LibraryInfoView libraryInfoView;
+
+    TextView txStart;//view_start_read
 
     public ReciteWordsFragments() {
         super();
@@ -30,13 +37,14 @@ public class ReciteWordsFragments extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        txStart = (TextView) view.findViewById(R.id.view_start_read);
+        txStart.setOnClickListener(this);
     }
 
     @Override
@@ -98,4 +106,12 @@ public class ReciteWordsFragments extends BaseFragment {
                 getArguments().getInt(MainActivity.ARG_SECTION_NUMBER));*/
     }
 
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.view_start_read:
+                IntentManager.intentToReciteWrdsActivity(this.getActivity(),null);
+                break;
+        }
+    }
 }

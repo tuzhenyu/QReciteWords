@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 /**
  * Created by tzy on 2016/1/7.
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements View.OnClickListener {
     protected View mRootView;
 
     @Override

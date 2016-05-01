@@ -22,79 +22,12 @@
         app:cardCornerRadius="1dp"
         app:cardElevation="0dp"
         >
-
-        <LinearLayout
+        <tzy.qrecitewords.widget.LibraryInfoView
+            android:id="@+id/library_info_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            />
 
-            <TextView
-                android:id="@+id/tx_libraryName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
-                style="?android:attr/listSeparatorTextViewStyle"
-                android:text="词库：四级"
-                android:textColor="@color/green"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                />
-
-
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_gravity="center_horizontal"
-                >
-
-                <tzy.qrecitewords.widget.WordLableView
-                    android:id="@+id/wlable_noread"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:WordLableNumbg="@drawable/shape_wlable_noread"
-                    app:WordLableTextContent="@string/wlable_noRead"
-                    />
-
-                <tzy.qrecitewords.widget.WordLableView
-                    android:id="@+id/wlable_fam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:WordLableNumbg="@drawable/shape_wlable_fam"
-                    app:WordLableTextContent="@string/wlable_fam"
-                    />
-
-                <tzy.qrecitewords.widget.WordLableView
-                    android:id="@+id/wlable_nofam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:WordLableNumbg="@drawable/shape_wlable_nofam"
-                    app:WordLableTextContent="@string/wlable_nofam"
-                    />
-
-                <tzy.qrecitewords.widget.WordLableView
-                    android:id="@+id/wlable_nokonwn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:WordLableNumbg="@drawable/shape_wlable_unknown"
-                    app:WordLableTextContent="@string/wlable_unknown"
-
-                    />
-
-            </LinearLayout>
-
-        </LinearLayout>
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
@@ -108,48 +41,54 @@
         app:cardElevation="0dp"
         >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
             >
-
-            <tzy.qrecitewords.widget.WordLableView
-                android:id="@+id/view_todayWord_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:WordLableNumbg="@color/transparent"
-                app:WordLableTextContent="@string/today_words_to_read"
-                app:WordLableTxColor="@color/gray"
-                app:WordLableTxSize="20sp"
-                />
 
             <tzy.qrecitewords.widget.WordLableView
                 android:id="@+id/view_todayWord_num_completd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 app:WordLableNumbg="@color/transparent"
                 app:WordLableTextContent="@string/words_today_complete"
                 app:WordLableTxColor="@color/gray"
                 app:WordLableTxSize="20sp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_centerHorizontal="true"
                 />
 
+
             <tzy.qrecitewords.widget.WordLableView
+                android:id="@+id/view_todayWord_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:WordLableNumbg="@color/transparent"
+                app:WordLableTextContent="@string/today_words_to_read"
+                app:WordLableTxColor="@color/gray"
+                app:WordLableTxSize="20sp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/view_todayWord_num_completd"
+                />
+
+            <TextView
                 android:id="@+id/view_start_read"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:WordLableNumbg="@drawable/shape_word_num"
-                app:WordLableNumText="@string/start_to_read"
-                app:WordLableVisibility="@integer/lable.gone"
-                app:WordLableNumTxSize="20sp"
+                android:text="@string/start_to_read"
+                android:gravity="center"
+                android:background="@drawable/shape_word_num"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="32dp"
+                android:textColor="@color/white"
+                android:textSize="22sp"
                 />
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 

@@ -114,4 +114,8 @@ public class SettingFragment extends BaseFragment {
                 getArguments().getInt(MainActivity.ARG_SECTION_NUMBER));*/
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
 }
