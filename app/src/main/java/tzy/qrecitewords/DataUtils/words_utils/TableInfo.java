@@ -1,4 +1,4 @@
-package tzy.qrecitewords.DataUtils.words_utils;
+package tzy.qrecitewords.dataUtils.words_utils;
 
 /**
  * Created by tzy on 2016/5/1.
@@ -30,5 +30,15 @@ public class TableInfo {
         public static final String column_isExist = "column_isExist";
 
         public static final String column_createdTime = "column_createdTime";
+    }
+
+    public static class Table_Sentence{
+        public static final int DATABASE_VERSION = 1;
+
+        public static final String TABLE_NAME = "table_Sentence";
+
+        public static final String column_content = "column_content";
+
+        public static final String column_date = "column_date";
     }
 }

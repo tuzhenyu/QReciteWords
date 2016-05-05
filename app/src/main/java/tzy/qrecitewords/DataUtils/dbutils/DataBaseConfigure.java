@@ -1,4 +1,4 @@
-package tzy.qrecitewords.DataUtils.dbutils;
+package tzy.qrecitewords.dataUtils.dbutils;
 
 /**
  * Created by sf on 2016/4/8.

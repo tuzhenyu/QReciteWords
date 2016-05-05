@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -136,6 +137,11 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    public class Presenter{
+
 
     }
 }

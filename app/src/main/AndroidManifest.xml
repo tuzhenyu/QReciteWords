@@ -8,6 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme.light"
         android:name=".app.WordsApp"
+        android:supportsRtl="true"
         >
         <activity
             android:name=".MainActivity"

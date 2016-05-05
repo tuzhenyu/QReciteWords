@@ -1,4 +1,4 @@
-package tzy.qrecitewords.DataUtils.words_utils;
+package tzy.qrecitewords.dataUtils.words_utils;
 
 public class SortModel {
 	

@@ -1,1 +1,1 @@
-include ':app', ':tapbarmenu'
+include ':app', ':tapbarmenu', ':greendao_lib'

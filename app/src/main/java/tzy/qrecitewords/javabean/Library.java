@@ -1,23 +1,60 @@
 package tzy.qrecitewords.javabean;
 
-import java.sql.Date;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.ModelContainer;
+import com.raizlabs.android.dbflow.annotation.NotNull;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
+import tzy.qrecitewords.dataUtils.dbutils.WordDataBase;
+
 
 /**
  * 词库
  * Created by tzy on 2016/2/24.
  */
-public class Library {
+@ModelContainer
+@Table(database = WordDataBase.class)
+public class Library extends BaseModel {
+    @PrimaryKey(autoincrement = true)
+    public Long id;
 
-    private String libraryName;
-    /**0代表不存在，1代表存在*/
-    private int isExist;
+    @Column
+    @NotNull
+    public String libraryName;
 
-    private Date createdTime;
+    @Column
+    public String introdu;//介绍信息
+
+    @Column
+    //**0代表不存在，1代表存在*/
+    public int isExist;
+
+    @Column
+    public Long createdTime;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getIntrodu() {
+        return introdu;
+    }
+
+    public void setIntrodu(String introdu) {
+        this.introdu = introdu;
+    }
 
     public Library(String libraryName) {
         this.libraryName = libraryName;
     }
 
+    public Library(){}
     public String getLibraryName() {
         return libraryName;
     }
@@ -34,11 +71,11 @@ public class Library {
         this.isExist = isExist;
     }
 
-    public Date getCreatedTime() {
+    public Long getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Date createdTime) {
+    public void setCreatedTime(Long createdTime) {
         this.createdTime = createdTime;
     }
 }

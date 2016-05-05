@@ -1,10 +1,10 @@
-package tzy.qrecitewords.DataUtils;
+package tzy.qrecitewords.dataUtils;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import tzy.qrecitewords.DataUtils.words_utils.TableInfo;
+import tzy.qrecitewords.dataUtils.words_utils.TableInfo;
 
 /**
  * Created by tzy on 2016/1/8.
@@ -21,7 +21,8 @@ public class SQLiteHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        creatTable_Library(db);
+        createTable_Sentence(db);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class SQLiteHelper extends SQLiteOpenHelper{
     /**创建词库的表
      * @param tableName 词库名称
      * */
-    public static void createTable_Word(String tableName){
+    public static void createTable_Word(String tableName,SQLiteDatabase db){
         StringBuilder sql = new StringBuilder("create table (");
         sql.append(tableName);
         sql.append( "_id integer primary key autoincrement,");
@@ -45,7 +46,7 @@ public class SQLiteHelper extends SQLiteOpenHelper{
     }
 
     /**创建词库信息表*/
-    public static void creatTable_Library(){
+    public static void creatTable_Library(SQLiteDatabase db){
         StringBuilder sql = new StringBuilder("create table (");
         sql.append(TableInfo.Table_Library.TABLE_NAME);
         sql.append( "_id integer primary key autoincrement,");
@@ -53,6 +54,18 @@ public class SQLiteHelper extends SQLiteOpenHelper{
         sql.append(TableInfo.Table_Library.column_isExist + " integer,");
         sql.append(TableInfo.Table_Library.column_createdTime + " date,");
         sql.append(");");
+        db.execSQL(sql.toString());
     }
+
+    public static void createTable_Sentence(SQLiteDatabase db){
+        StringBuilder sql = new StringBuilder("create table (");
+        sql.append(TableInfo.Table_Sentence.TABLE_NAME);
+        sql.append( "_id integer primary key autoincrement,");
+        sql.append(TableInfo.Table_Sentence.column_content + " text,");
+        sql.append(TableInfo.Table_Sentence.column_date + " date,");
+        sql.append(");");
+        db.execSQL(sql.toString());
+    }
+
 
 }

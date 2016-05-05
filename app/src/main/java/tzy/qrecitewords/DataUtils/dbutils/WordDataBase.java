@@ -1,14 +1,14 @@
-package tzy.qrecitewords.DataUtils.dbutils;
+package tzy.qrecitewords.dataUtils.dbutils;
 
-/*import com.raizlabs.android.dbflow.annotation.Database;*/
+import com.raizlabs.android.dbflow.annotation.Database;
 
 /**
  * Created by tzy on 2016/4/8.
  */
-
-/*@Database(name = WordDataBase.DATABASE_NAME, version = WordDataBase.DATABASE_VERSION)*/
+@Database(name = WordDataBase.NAME,version = WordDataBase.VERSION,foreignKeysSupported = true)
 public class WordDataBase {
-    public static final int DATABASE_VERSION = 1;
-
-    public static final String DATABASE_NAME = "WordDataBase";
+    //数据库名称
+    public static final String NAME = "AppDatabase";
+    //数据库版本号
+    public static final int VERSION = 2;
 }

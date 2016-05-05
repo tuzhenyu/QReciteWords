@@ -33,7 +33,7 @@ import tzy.qrecitewords.fragment.LibraryFragment;
 import tzy.qrecitewords.fragment.PersonFragment;
 import tzy.qrecitewords.fragment.ReciteWordsFragments;
 import tzy.qrecitewords.fragment.SettingFragment;
-import tzy.tapbarmenu.TapBarMenu;
+//import tzy.tapbarmenu.TapBarMenu;
 
 public class MainActivity extends AppCompatActivity
         implements View.OnClickListener {
