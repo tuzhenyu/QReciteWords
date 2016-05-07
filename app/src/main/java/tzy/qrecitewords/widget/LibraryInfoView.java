@@ -52,8 +52,9 @@ public class LibraryInfoView extends LinearLayout {
 
     }
 
-    public void setTxLibraryName(String libraryName){
-        txLibraryName.setText(libraryName);
+    public void setTxLibraryName(String libraryName,int countofWord){
+        String name = libraryName + "(" + countofWord + ")";
+        txLibraryName.setText(name);
     }
 
     public void setWlableNoread(String s){
@@ -70,5 +71,14 @@ public class LibraryInfoView extends LinearLayout {
 
     public void setWlableNoknown(String s){
         wlableNoknown.setLNumText(s);
+    }
+
+    /**设置为空词本*/
+    public void setTxLibraryNameNull(){
+        txLibraryName.setText(getResources().getString(R.string.library_not_selected));
+        wlableNoread.setLNumText("0");
+        wlableFam.setLNumText("0");
+        wlableNofam.setLNumText("0");
+        wlableNoknown.setLNumText("0");
     }
 }
