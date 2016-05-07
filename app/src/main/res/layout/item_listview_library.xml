@@ -12,7 +12,6 @@
     android:layout_height="wrap_content"
     android:padding="16dp"
     android:duplicateParentState="true"
-
     >
     <TextView
         android:id="@+id/textView_libraryName"
@@ -27,13 +26,27 @@
         />
 
     <TextView
+        android:id="@+id/text_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/librar_selected_remind"
+        android:layout_below="@id/textView_libraryName"
+        android:textColor="@color/material_blue_500"
+        android:layout_marginTop="12dp"
+        android:textSize="16sp"
+        android:visibility="gone"
+        />
+
+    <TextView
         android:id="@+id/imageView_selector_icon"
         android:duplicateParentState="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_alignBottom="@id/textView_libraryName"
         android:textSize="24sp"
+        android:text="@string/see"
         android:textColor="@color/lightblue"
         />
 </RelativeLayout>

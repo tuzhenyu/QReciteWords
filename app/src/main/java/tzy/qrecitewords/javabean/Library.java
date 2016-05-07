@@ -1,11 +1,16 @@
 package tzy.qrecitewords.javabean;
 
+import android.support.annotation.BoolRes;
+
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.NotNull;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.annotation.Unique;
 import com.raizlabs.android.dbflow.structure.BaseModel;
+
+import java.sql.Date;
 
 import tzy.qrecitewords.dataUtils.dbutils.WordDataBase;
 
@@ -17,11 +22,13 @@ import tzy.qrecitewords.dataUtils.dbutils.WordDataBase;
 @ModelContainer
 @Table(database = WordDataBase.class)
 public class Library extends BaseModel {
+
     @PrimaryKey(autoincrement = true)
     public Long id;
 
     @Column
     @NotNull
+    @Unique
     public String libraryName;
 
     @Column
@@ -32,7 +39,11 @@ public class Library extends BaseModel {
     public int isExist;
 
     @Column
-    public Long createdTime;
+    public Date createdTime;
+
+    @Column(defaultValue = "false")
+    @NotNull
+    public boolean isSelected;
 
     public Long getId() {
         return id;
@@ -71,11 +82,33 @@ public class Library extends BaseModel {
         this.isExist = isExist;
     }
 
-    public Long getCreatedTime() {
+    public Date getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Long createdTime) {
+    public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if(o == null)return false;
+        if(this == o)return true;
+
+        if(o instanceof Library){
+            if(this.getLibraryName().equals(((Library) o).getLibraryName())){
+                return true;
+            }
+        }
+        return false;
     }
 }

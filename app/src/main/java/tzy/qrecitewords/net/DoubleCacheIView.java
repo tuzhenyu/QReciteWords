@@ -1,12 +1,9 @@
 package tzy.qrecitewords.net;
 
-import java.net.URI;
-
 /**
- * 该接口用于定义了Frament的数据加载
- * Created by Administrator on 2015/7/30.
+ * Created by tzy on 2016/5/7.
  */
-public interface IView <Request,Result>{
+public interface DoubleCacheIView<Result> {
 
     public static  int GETMethod = 0;
 
@@ -15,22 +12,25 @@ public interface IView <Request,Result>{
     /**
      * 请求数据必须实现的方法
      */
-    void rquestData(Request request);
+    void rquestData();
 
     /**
      * 请求更多数据
-     * @param request
      * @param page 页码
      */
-    void requestMoreData(Request request, int page);
+    void requestMoreData( int page);
     /**
      * 加载数据必须实现的方法
      */
-    void loadData(Result data);
+    void showLocalData(Result result);
+
+    void showNetData(Result result);
 
     /**
      * 加载更多数据
      * @param data
      */
-    void loadMoreData(Result data);
+    void showMoreData(Result data);
+
+    void showErrorMsg(String error);
 }

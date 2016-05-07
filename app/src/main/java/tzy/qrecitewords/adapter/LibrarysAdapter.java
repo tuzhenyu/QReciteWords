@@ -58,29 +58,52 @@ public class LibrarysAdapter extends BaseAdapter {
             viewHodler.library = library;
             viewHodler.textViewLibrary = (TextView) convertView.findViewById(R.id.textView_libraryName);
             viewHodler.selectorIcon = (TextView)convertView.findViewById(R.id.imageView_selector_icon);
+            viewHodler.selectedText = (TextView)convertView.findViewById(R.id.text_selected);
             convertView.setTag(viewHodler);
 
         }else{
             viewHodler = (ViewHodler) convertView.getTag();
         }
-
+        viewHodler.library = library;
         viewHodler.textViewLibrary.setText(library.getLibraryName());
         ListView listView = (ListView) parent;
         if(listView.getCheckedItemPosition() == position) {
-            viewHodler.selectorIcon.setText("See");
+            viewHodler.selectorIcon.setVisibility(View.VISIBLE);
+            viewHodler.selectorIcon.setText("查看");
             viewHodler.context = context;
             viewHodler.selectorIcon.setOnClickListener(viewHodler);
+            viewHodler.selectedText.setVisibility(View.VISIBLE);
         } else{
-            viewHodler.selectorIcon.setText("");
-            viewHodler.context = null;
+            viewHodler.selectedText.setVisibility(View.GONE);
+            viewHodler.selectorIcon.setVisibility(View.GONE);
         }
+
         return convertView;
     }
 
+    public List<Library> getLibraries() {
+        return libraries;
+    }
+
+    public void setLibraries(List<Library> libraries) {
+        if(this.libraries != null){this.libraries.clear();}
+        this.libraries = libraries;
+        notifyDataSetChanged();
+    }
+
+    public Activity getContext() {
+        return context;
+    }
+
+    public void setContext(Activity context) {
+        this.context = context;
+    }
+
     private static  class ViewHodler implements View.OnClickListener{
-        public  Library library;
+        public Library library;
         public TextView textViewLibrary;
         public TextView selectorIcon;
+        public TextView selectedText;
         public Context context;
         @Override
         public void onClick(View v) {

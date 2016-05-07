@@ -35,4 +35,8 @@
     <string name="word_lable_fam">很熟悉</string>
     <string name="word_lable_nofam">不熟悉</string>
     <string name="word_lable_unknown">很陌生</string>
+
+    <string name="librar_selected_remind">已选择该单词本，请点击取消</string>
+    <string name="library_not_selected">请选择词本</string>
+    <string name="see">查看</string>
 </resources>

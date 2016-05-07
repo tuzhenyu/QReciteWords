@@ -17,7 +17,7 @@ import tzy.qrecitewords.dataUtils.dbutils.WordDataBase;
 /**
  * Created by tzy on 2016/1/7.
  */
-@Table(database = WordDataBase.class)
+@Table(database = WordDataBase.class, cachingEnabled = true)
 public class Word extends BaseModel {
 
     @PrimaryKey(autoincrement = true)
