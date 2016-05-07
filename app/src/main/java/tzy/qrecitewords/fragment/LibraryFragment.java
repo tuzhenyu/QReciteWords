@@ -26,6 +26,7 @@ import tzy.qrecitewords.javabean.Library;
 import tzy.qrecitewords.net.DoubleCacheIView;
 import tzy.qrecitewords.net.DoubleCachePresenter;
 import tzy.qrecitewords.net.UrlValue;
+import tzy.qrecitewords.widget.LibraryInfoView;
 
 /**
  * Created by tzy on 2016/1/1.
@@ -41,6 +42,8 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
     ListView listView;
 
     FloatingActionButton floatingActionButton;
+
+    LibraryInfoView libraryInfoView;
 
     public LibraryFragment() {
         super();
@@ -65,19 +68,15 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
         floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
         listView = (ListView) view.findViewById(R.id.listView);
 
-        String[] ss = new String[]{"四级", "六级", "雅思", "托福", "六年级英语", "高中英语", "初中英语", "小学英语"};
-
-        List<String> stringList = Arrays.asList(ss);
-
-        List<Library> libraries = new LinkedList<>();
-
-        for (String libraryName : stringList) {
-            libraries.add(new Library(libraryName));
-        }
-
-        //librarysAdapter = new LibrarysAdapter(libraries, this.getActivity());
-
+        //String[] ss = new String[]{"四级", "六级", "雅思", "托福", "六年级英语", "高中英语", "初中英语", "小学英语"};
+        //List<String> stringList = Arrays.asList(ss);
+        //List<Library> libraries = new LinkedList<>();
+        //for (String libraryName : stringList) {
+        //    libraries.add(new Library(libraryName));
+       // }
+        //librarysAdapter = new LibrarysAdapter(libraries, this.getActivity())
         //listView.setAdapter(librarysAdapter);
+        libraryInfoView = (LibraryInfoView) view.findViewById(R.id.library_info_view);
         rquestData();
         listView.setOnItemClickListener(this);
         floatingActionButton.attachToListView(listView);
