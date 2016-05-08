@@ -5,11 +5,13 @@ package tzy.qrecitewords.net;
  */
 public class UrlValue {
 
-    public static final String HOST = "";
+    public static final String HOST = "10.10.114.29";
+
+    public static final String port = ":8080";
 
     public static final String HTTP_PRO = "http://";
 
-    public static final String serviceName = "QRWord";
+    public static final String serviceName = "QwordServer";
 
     public static final String getLibraries = "getLibraries";
 
@@ -17,6 +19,9 @@ public class UrlValue {
         StringBuilder url = new StringBuilder(HTTP_PRO);
 
         url.append(HOST);
+
+        url.append(port);
+
         url.append("/");
 
         url.append(serviceName);
