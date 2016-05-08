@@ -21,8 +21,7 @@ public class LibraryInfo {
         int noknown = 3;
     }
 
-
-    String LibraryName ;//词库名称
+    String LibraryIntrodu;//词库名称
 
     int countNoRead ;//未读单词的数量
 
@@ -34,10 +33,10 @@ public class LibraryInfo {
 
     int countOfTotal;//所有单词数
 
-    public static LibraryInfo CursorToLibraryInfo(String libraryName,Cursor cursor){
-        if(TextUtils.isEmpty(libraryName) || cursor == null ){return null;}
+    public static LibraryInfo CursorToLibraryInfo(String LibraryIntrodu,Cursor cursor){
+        if(TextUtils.isEmpty(LibraryIntrodu) || cursor == null ){return null;}
         LibraryInfo info = new LibraryInfo();
-        info.setLibraryName(libraryName);
+        info.setLibraryIntrodu(LibraryIntrodu);
         while(cursor.moveToNext()){
             int familiarity = cursor.getInt(0);
             int count = cursor.getInt(1);
@@ -70,12 +69,12 @@ public class LibraryInfo {
         this.countOfTotal = countOfTotal;
     }
 
-    public String getLibraryName() {
-        return LibraryName;
+    public String getLibraryIntrodu() {
+        return LibraryIntrodu;
     }
 
-    public void setLibraryName(String libraryName) {
-        LibraryName = libraryName;
+    public void setLibraryIntrodu(String libraryIntrodu) {
+        LibraryIntrodu = libraryIntrodu;
     }
 
     public int getCountNoRead() {
