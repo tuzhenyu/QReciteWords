@@ -65,7 +65,7 @@ public class LibrarysAdapter extends BaseAdapter {
             viewHodler = (ViewHodler) convertView.getTag();
         }
         viewHodler.library = library;
-        viewHodler.textViewLibrary.setText(library.getLibraryName());
+        viewHodler.textViewLibrary.setText(library.getIntrodu());
         ListView listView = (ListView) parent;
         if(listView.getCheckedItemPosition() == position) {
             viewHodler.selectorIcon.setVisibility(View.VISIBLE);
