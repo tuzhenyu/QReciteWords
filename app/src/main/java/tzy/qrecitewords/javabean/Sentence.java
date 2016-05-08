@@ -25,7 +25,7 @@ public class Sentence extends BaseModel {
     public String content;
 
     @Column
-    public Date date;
+    public Long date;
 
     public Sentence() {
     }
@@ -46,11 +46,11 @@ public class Sentence extends BaseModel {
         this.content = content;
     }
 
-    public Date getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 
@@ -58,7 +58,7 @@ public class Sentence extends BaseModel {
 
         Sentence sentence = new Sentence();
         sentence.setContent(cursor.getString(1));
-        sentence.setDate(new Date(cursor.getLong(2)));
+        sentence.setDate(cursor.getLong(2));
         return sentence;
     }
 }
