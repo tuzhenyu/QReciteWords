@@ -185,6 +185,10 @@ public abstract class DoubleCachePresenter<D> {
         queue.add(request);
     }
 
+    public  DoubleCacheIView getIView(){
+        return iViewp.get();
+    }
+
     public Context getContext()
     {
         if(iViewp!=null && iViewp.get()!=null)
