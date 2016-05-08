@@ -7,10 +7,18 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
 import com.melnykov.fab.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -263,7 +271,7 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
             Libraries libraries = new Libraries();
             super.dataDealFromNet(libraries, run);
         }
-
+        
         public void getLibraryInfo(Library library){
 
             WordSerivce.getLibraryInfo(library, new ResultLisenter<LibraryInfo>() {
