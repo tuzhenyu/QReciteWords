@@ -1,5 +1,6 @@
 package tzy.qrecitewords.javabean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**

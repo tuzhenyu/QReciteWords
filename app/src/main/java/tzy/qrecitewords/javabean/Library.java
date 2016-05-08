@@ -39,7 +39,7 @@ public class Library extends BaseModel {
     public int isExist;
 
     @Column
-    public Date createdTime;
+    public long createdTime;
 
     @Column(defaultValue = "false")
     @NotNull
@@ -82,11 +82,11 @@ public class Library extends BaseModel {
         this.isExist = isExist;
     }
 
-    public Date getCreatedTime() {
+    public long getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Date createdTime) {
+    public void setCreatedTime(long createdTime) {
         this.createdTime = createdTime;
     }
 
@@ -105,6 +105,8 @@ public class Library extends BaseModel {
         if(this == o)return true;
 
         if(o instanceof Library){
+            Library rValue = (Library) o;
+            if(this.id == rValue.id){return true;}
             if(this.getLibraryName().equals(((Library) o).getLibraryName())){
                 return true;
             }
