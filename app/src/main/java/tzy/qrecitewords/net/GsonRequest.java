@@ -7,6 +7,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ public class GsonRequest<T> extends Request<T> {
     public GsonRequest(int method, String url, Class<T> clazz,  Response.Listener<T> listener,
                        Response.ErrorListener errorListener) {
         super(method, url, errorListener);
-        mGson = new Gson();
+        mGson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         mClass = clazz;
         mListener = listener;
     }
@@ -46,7 +47,7 @@ public class GsonRequest<T> extends Request<T> {
     public GsonRequest(int method, String url, Class<T> clazz, Map<String,String> map,Response.Listener<T> listener,
                        Response.ErrorListener errorListener) {
         this( method, url, clazz,  listener,errorListener);
-        mGson = new Gson();
+        mGson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
         mClass = clazz;
         mListener = listener;
        this.map = map;

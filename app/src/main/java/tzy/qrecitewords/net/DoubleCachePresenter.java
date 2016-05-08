@@ -112,7 +112,7 @@ public abstract class DoubleCachePresenter<D> {
      */
     public void  requestData(String req,Class<D> dClass)
     {
-        GsonRequest<D> request = new GsonRequest<D>(Request.Method.POST, req, dClass, new Response.Listener<D>() {
+        GsonRequest<D> request = new GsonRequest<D>(Request.Method.GET, req, dClass, new Response.Listener<D>() {
             @Override
             public void onResponse(final D d) {
                 dataDealFromNet(d, new Runnable() {
@@ -131,8 +131,6 @@ public abstract class DoubleCachePresenter<D> {
 
         queue.add(request);
     }
-
-
 
     /**
      *
