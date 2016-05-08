@@ -20,9 +20,12 @@ import java.util.Set;
 import tzy.qrecitewords.MainActivity;
 import tzy.qrecitewords.R;
 import tzy.qrecitewords.adapter.LibrarysAdapter;
+import tzy.qrecitewords.dataUtils.dbutils.ResultLisenter;
 import tzy.qrecitewords.dataUtils.serivce.LibrarySerivce;
+import tzy.qrecitewords.dataUtils.serivce.WordSerivce;
 import tzy.qrecitewords.javabean.Libraries;
 import tzy.qrecitewords.javabean.Library;
+import tzy.qrecitewords.javabean.LibraryInfo;
 import tzy.qrecitewords.net.DoubleCacheIView;
 import tzy.qrecitewords.net.DoubleCachePresenter;
 import tzy.qrecitewords.net.UrlValue;
@@ -77,6 +80,7 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
         //librarysAdapter = new LibrarysAdapter(libraries, this.getActivity())
         //listView.setAdapter(librarysAdapter);
         libraryInfoView = (LibraryInfoView) view.findViewById(R.id.library_info_view);
+        libraryInfoView.setTxLibraryNameNull();
         rquestData();
         listView.setOnItemClickListener(this);
         floatingActionButton.attachToListView(listView);
@@ -185,6 +189,14 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
 
     }
 
+    public void showLibraryInfo(LibraryInfo info){
+        libraryInfoView.setTxLibraryNameNull();//先清楚清除之前的状态
+        libraryInfoView.setTxLibraryName(info.getLibraryIntrodu(),info.getCountOfTotal());
+        libraryInfoView.setWlableFam(info.getCountFam()+ "");
+        libraryInfoView.setWlableNofam(info.getCountNoFam()+ "");
+        libraryInfoView.setWlableNoknown(info.getCountNoKnown()+ "");
+        libraryInfoView.setWlableNoread(info.getCountNoRead() + "");
+    }
     @Override
     public void showErrorMsg(String error) {
         Toast.makeText(this.getActivity(),error,Toast.LENGTH_SHORT).show();
@@ -217,7 +229,15 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
 
         @Override
         public void postLocalData(Libraries data) {
+            mLibraries.clear();
             mLibraries.addAll(data.getLibraries());
+
+            for(Library library : data.getLibraries()){//
+                if(library.isSelected()){
+                    getLibraryInfo(library);
+                    break;
+                }
+            }
             super.postLocalData(data);
         }
 
@@ -242,6 +262,19 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
             mLibraries = nDatas;
             Libraries libraries = new Libraries();
             super.dataDealFromNet(libraries, run);
+        }
+
+        public void getLibraryInfo(Library library){
+
+            WordSerivce.getLibraryInfo(library, new ResultLisenter<LibraryInfo>() {
+                @Override
+                public void reviceResult(LibraryInfo result) {
+                        LibraryFragment libraryFragment = (LibraryFragment) getIView();
+                        if(result != null){
+                            libraryFragment.showLibraryInfo(result);
+                        }
+                }
+            });
         }
     }
 
