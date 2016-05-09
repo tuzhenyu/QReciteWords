@@ -23,7 +23,7 @@ public class WordSerivce {
      */
     public static LibraryInfo getLibraryInfo(final Library library,final ResultLisenter<LibraryInfo> lisenter) {
 
-        SQLite.select(Word_Table.familiarity, Method.count(Word_Table.id))
+        /*SQLite.select(Word_Table.familiarity, Method.count(Word_Table.id))
                 .from(Word.class)
                 .where(Word_Table.library_id.eq(library.getId()))
                 .groupBy(Word_Table.familiarity)
@@ -47,7 +47,7 @@ public class WordSerivce {
                         else
                             return false;
                     }
-                });
+                });*/
 
         return null;
     }

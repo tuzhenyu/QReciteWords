@@ -115,7 +115,7 @@ public abstract class DoubleCachePresenter<D> {
         GsonRequest<D> request = new GsonRequest<D>(Request.Method.GET, req, dClass, new Response.Listener<D>() {
             @Override
             public void onResponse(final D d) {
-                dataDealFromNet(d, new Runnable() {
+                 dataDealFromNet(d, new Runnable() {
                     @Override
                     public void run() {
                         postRequestDataFromNet(d,null);

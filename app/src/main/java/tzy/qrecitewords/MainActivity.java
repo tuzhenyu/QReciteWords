@@ -21,6 +21,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.ImageView;
 
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -43,6 +46,8 @@ public class MainActivity extends AppCompatActivity
     private ViewPager mViewPager;
 
     FragmentPagerAdapter pagerAdapter;
+
+    RequestQueue queue;
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -77,6 +82,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        queue = Volley.newRequestQueue(this);
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
 
         mTabLayout = (TabLayout) findViewById(R.id.tl);
@@ -258,6 +264,14 @@ public class MainActivity extends AppCompatActivity
                 break;
         }*/
        // tapBarMenu.close();
+    }
+
+    public RequestQueue getQueue() {
+        return queue;
+    }
+
+    public void setQueue(RequestQueue queue) {
+        this.queue = queue;
     }
 
     class WordViewPagerAdapter extends FragmentPagerAdapter{

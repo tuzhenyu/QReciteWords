@@ -6,6 +6,7 @@ import java.util.List;
 
 import tzy.qrecitewords.javabean.Libraries;
 import tzy.qrecitewords.javabean.Library;
+import tzy.qrecitewords.javabean.Library_Table;
 
 /**
  * Created by tzy on 2016/5/7.
@@ -18,6 +19,11 @@ public class LibrarySerivce {
         Libraries libraries = new Libraries();
         libraries.setLibraries(list);
         return libraries;
+    }
+
+    /**查询已被选中的词库*/
+    public static Library getSelectedLbrary(){
+       return new Select().from(Library.class).where(Library_Table.isSelected.eq(true)).querySingle();
     }
 
 }

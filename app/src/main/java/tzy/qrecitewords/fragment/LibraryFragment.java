@@ -28,9 +28,7 @@ import java.util.Set;
 import tzy.qrecitewords.MainActivity;
 import tzy.qrecitewords.R;
 import tzy.qrecitewords.adapter.LibrarysAdapter;
-import tzy.qrecitewords.dataUtils.dbutils.ResultLisenter;
 import tzy.qrecitewords.dataUtils.serivce.LibrarySerivce;
-import tzy.qrecitewords.dataUtils.serivce.WordSerivce;
 import tzy.qrecitewords.javabean.Libraries;
 import tzy.qrecitewords.javabean.Library;
 import tzy.qrecitewords.javabean.LibraryInfo;
@@ -69,7 +67,8 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new Presenter(this,Volley.newRequestQueue(this.getActivity()));
+        MainActivity activity = (MainActivity) getActivity();
+        presenter = new Presenter(this,activity.getQueue());
     }
 
     @Override
@@ -78,21 +77,11 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
 
         floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
         listView = (ListView) view.findViewById(R.id.listView);
-
-        //String[] ss = new String[]{"四级", "六级", "雅思", "托福", "六年级英语", "高中英语", "初中英语", "小学英语"};
-        //List<String> stringList = Arrays.asList(ss);
-        //List<Library> libraries = new LinkedList<>();
-        //for (String libraryName : stringList) {
-        //    libraries.add(new Library(libraryName));
-       // }
-        //librarysAdapter = new LibrarysAdapter(libraries, this.getActivity())
-        //listView.setAdapter(librarysAdapter);
         libraryInfoView = (LibraryInfoView) view.findViewById(R.id.library_info_view);
         libraryInfoView.setTxLibraryNameNull();
         rquestData();
         listView.setOnItemClickListener(this);
         floatingActionButton.attachToListView(listView);
-
     }
 
     @Override
@@ -197,9 +186,9 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
 
     }
 
-    public void showLibraryInfo(LibraryInfo info){
+    public void showLibraryInfo(Library info){
         libraryInfoView.setTxLibraryNameNull();//先清楚清除之前的状态
-        libraryInfoView.setTxLibraryName(info.getLibraryIntrodu(),info.getCountOfTotal());
+        libraryInfoView.setTxLibraryName(info.getIntrodu(),info.getCountOfTotal());
         libraryInfoView.setWlableFam(info.getCountFam()+ "");
         libraryInfoView.setWlableNofam(info.getCountNoFam()+ "");
         libraryInfoView.setWlableNoknown(info.getCountNoKnown()+ "");
@@ -242,7 +231,8 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
 
             for(Library library : data.getLibraries()){//
                 if(library.isSelected()){
-                    getLibraryInfo(library);
+                    LibraryFragment libraryFragment = (LibraryFragment) getIView();
+                    libraryFragment.showLibraryInfo(library);
                     break;
                 }
             }
@@ -270,19 +260,6 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
             mLibraries = nDatas;
             Libraries libraries = new Libraries();
             super.dataDealFromNet(libraries, run);
-        }
-        
-        public void getLibraryInfo(Library library){
-
-            WordSerivce.getLibraryInfo(library, new ResultLisenter<LibraryInfo>() {
-                @Override
-                public void reviceResult(LibraryInfo result) {
-                        LibraryFragment libraryFragment = (LibraryFragment) getIView();
-                        if(result != null){
-                            libraryFragment.showLibraryInfo(result);
-                        }
-                }
-            });
         }
     }
 
