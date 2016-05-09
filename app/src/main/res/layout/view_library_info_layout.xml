@@ -40,6 +40,7 @@
             android:layout_weight="1"
             app:WordLableNumbg="@drawable/shape_wlable_noread"
             app:WordLableTextContent="@string/wlable_noRead"
+            app:WordLableNumTxSize="20sp"
             />
 
         <tzy.qrecitewords.widget.WordLableView
@@ -48,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:WordLableNumbg="@drawable/shape_wlable_fam"
+            app:WordLableNumTxSize="20sp"
             app:WordLableTextContent="@string/wlable_fam"
             />
 
@@ -57,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:WordLableNumbg="@drawable/shape_wlable_nofam"
+            app:WordLableNumTxSize="20sp"
             app:WordLableTextContent="@string/wlable_nofam"
             />
 
@@ -66,6 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:WordLableNumbg="@drawable/shape_wlable_unknown"
+            app:WordLableNumTxSize="20sp"
             app:WordLableTextContent="@string/wlable_unknown"
 
             />
