@@ -9,10 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.sql.Date;
+
 import tzy.qrecitewords.MainActivity;
 import tzy.qrecitewords.R;
+import tzy.qrecitewords.dataUtils.serivce.LibrarySerivce;
+import tzy.qrecitewords.dataUtils.serivce.MissionService;
+import tzy.qrecitewords.javabean.Library;
+import tzy.qrecitewords.javabean.MissionOfDay;
 import tzy.qrecitewords.utils.IntentManager;
 import tzy.qrecitewords.widget.LibraryInfoView;
+import tzy.qrecitewords.widget.WordLableView;
 
 /**
  * Created by tzy on 2016/1/1.
@@ -22,6 +29,12 @@ public class ReciteWordsFragments extends BaseFragment  {
     public static final String TAG = ReciteWordsFragments.class.getSimpleName();
 
     LibraryInfoView libraryInfoView;
+
+    WordLableView lableTodayWords;
+
+    WordLableView lableCountOfLearned;
+
+    View viewStartRead;
 
     TextView txStart;//view_start_read
 
@@ -44,7 +57,12 @@ public class ReciteWordsFragments extends BaseFragment  {
         super.onViewCreated(view, savedInstanceState);
 
         txStart = (TextView) view.findViewById(R.id.view_start_read);
+        libraryInfoView = (LibraryInfoView) view.findViewById(R.id.library_info_view);
         txStart.setOnClickListener(this);
+
+        lableTodayWords = (WordLableView) view.findViewById(R.id.view_todayWord_num);
+
+        lableCountOfLearned = (WordLableView) view.findViewById(R.id.view_todayWord_num_completd);
     }
 
     @Override
@@ -60,6 +78,17 @@ public class ReciteWordsFragments extends BaseFragment  {
     @Override
     public void onResume() {
         super.onResume();
+        Library library = LibrarySerivce.getSelectedLbrary();
+        if(library == null){
+            libraryInfoView.setTxLibraryNameNull();
+        }else{
+            library.setCountOfTotal(library.getCountFam() + library.getCountNoRead() + library.getCountNoKnown() + library.getCountNoFam());
+            libraryInfoView.setTxLibraryName(library.getIntrodu(),library.getCountOfTotal());
+        }
+
+        MissionOfDay missionOfDay = MissionService.queryTodayMission(new Date(System.currentTimeMillis()));
+        lableTodayWords.setLNumText(missionOfDay.getTodayWords() + "");
+        lableCountOfLearned.setLNumText(missionOfDay.getCountOfLearned() + "");
     }
 
     @Override
