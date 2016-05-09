@@ -23,6 +23,21 @@ import tzy.qrecitewords.dataUtils.dbutils.WordDataBase;
 @Table(database = WordDataBase.class)
 public class Library extends BaseModel {
 
+    /**
+     * 熟悉程度
+     * 1代表熟悉；
+     * 2代表不熟悉；
+     * 3代表很不熟悉，
+     * 0代表没读过
+     * */
+    public interface Familiarity{
+        int noRead = 0;
+        int familary = 1;
+        int nofamilary = 2;
+        int noknown = 3;
+    }
+
+
     @PrimaryKey(autoincrement = true)
     public Long id;
 
@@ -44,6 +59,17 @@ public class Library extends BaseModel {
     @Column(defaultValue = "false")
     @NotNull
     public boolean isSelected;
+
+    @Column(defaultValue = "0")
+    int countNoRead ;//未读单词的数量
+    @Column(defaultValue = "0")
+    int countNoKnown;//陌生单词的数量
+    @Column(defaultValue = "0")
+    int countFam;//熟悉单词的数量
+    @Column(defaultValue = "0")
+    int countNoFam;//有点陌生的单词的数量
+
+    int countOfTotal;//所有单词数
 
     public Long getId() {
         return id;
@@ -96,6 +122,46 @@ public class Library extends BaseModel {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+    public int getCountNoRead() {
+        return countNoRead;
+    }
+
+    public void setCountNoRead(int countNoRead) {
+        this.countNoRead = countNoRead;
+    }
+
+    public int getCountOfTotal() {
+        return countOfTotal;
+    }
+
+    public void setCountOfTotal(int countOfTotal) {
+        this.countOfTotal = countOfTotal;
+    }
+
+    public int getCountNoFam() {
+        return countNoFam;
+    }
+
+    public void setCountNoFam(int countNoFam) {
+        this.countNoFam = countNoFam;
+    }
+
+    public int getCountFam() {
+        return countFam;
+    }
+
+    public void setCountFam(int countFam) {
+        this.countFam = countFam;
+    }
+
+    public int getCountNoKnown() {
+        return countNoKnown;
+    }
+
+    public void setCountNoKnown(int countNoKnown) {
+        this.countNoKnown = countNoKnown;
     }
 
     @Override

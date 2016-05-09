@@ -16,7 +16,7 @@ public class WordDataBase {
     //数据库名称
     public static final String NAME = "AppDatabase";
     //数据库版本号
-    public static final int VERSION = 4;
+    public static final int VERSION = 6;
 
     @Migration(version = WordDataBase.VERSION,database = WordDataBase.class)
     public static  class Migration_Library extends AlterTableMigration<Library>{
@@ -28,7 +28,14 @@ public class WordDataBase {
         @Override
         public void onPreMigrate() {
             super.onPreMigrate();
-            addColumn(SQLiteType.INTEGER, Library_Table.isSelected.getNameAlias().getName());
+            /**v = 4*/
+            //addColumn(SQLiteType.INTEGER, Library_Table.isSelected.getNameAlias().getName());
+
+            /**v = 6*/
+            addColumn(SQLiteType.INTEGER, Library_Table.countFam.getNameAlias().getName());
+            addColumn(SQLiteType.INTEGER, Library_Table.countNoFam.getNameAlias().getName());
+            addColumn(SQLiteType.INTEGER, Library_Table.countNoKnown.getNameAlias().getName());
+            addColumn(SQLiteType.INTEGER, Library_Table.countNoRead.getNameAlias().getName());
         }
     }
 }

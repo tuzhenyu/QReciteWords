@@ -7,13 +7,13 @@ import android.text.TextUtils;
  * Created by tzy on 2016/5/1.
  */
 public class LibraryInfo {
-    /**
+   /* *//**
      * 熟悉程度
      * 1代表熟悉；
      * 2代表不熟悉；
      * 3代表很不熟悉，
      * 0代表没读过
-     * */
+     * *//*
     public interface Familiarity{
         int noRead = 0;
         int familary = 1;
@@ -107,5 +107,5 @@ public class LibraryInfo {
 
     public void setCountNoFam(int countNoFam) {
         this.countNoFam = countNoFam;
-    }
+    }*/
 }
