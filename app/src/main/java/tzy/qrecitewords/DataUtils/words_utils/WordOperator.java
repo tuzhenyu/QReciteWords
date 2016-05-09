@@ -8,6 +8,7 @@ import android.util.Log;
 
 import java.util.List;
 
+import tzy.qrecitewords.javabean.Library;
 import tzy.qrecitewords.javabean.LibraryInfo;
 import tzy.qrecitewords.javabean.Word;
 
@@ -25,7 +26,7 @@ public class WordOperator extends DataBaseOperator {
 
     public long insert(Word word){
         ContentValues values = new ContentValues();
-        values.put(TableInfo.Table_Word.column_familiarity, LibraryInfo.Familiarity.noRead);
+        values.put(TableInfo.Table_Word.column_familiarity, Library.Familiarity.noRead);
         values.put(TableInfo.Table_Word.column_lastReadTime,0);
         values.put(TableInfo.Table_Word.column_word,word.getWord());
         values.put(TableInfo.Table_Word.column_phonogram,word.getPhonogram());
@@ -35,7 +36,7 @@ public class WordOperator extends DataBaseOperator {
 
     /**获取词库信息*/
     public LibraryInfo getLibraryInfo(String libraryName){
-        if(checkDataBase((mDatabase))){return null;}
+       /* if(checkDataBase((mDatabase))){return null;}
 
         StringBuilder query = new StringBuilder("select ");
         query.append(TableInfo.Table_Word.column_familiarity);
@@ -55,7 +56,8 @@ public class WordOperator extends DataBaseOperator {
             return null;
         }finally {
             cursor.close();
-        }
+        }*/
+        return null;
     }
 
     public static boolean checkDataBase(SQLiteDatabase database){
