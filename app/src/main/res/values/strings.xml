@@ -39,4 +39,24 @@
     <string name="librar_selected_remind">已选择该单词本，请点击取消</string>
     <string name="library_not_selected">请选择词本</string>
     <string name="see">查看</string>
+
+    <string name="title_library_download">下载词库</string>
+    <string name="msg_library_download">是否下载 %1$s</string>
+    <string name="title_library_delete">删除词库</string>
+    <string name="msg_library_delete">是否删除 %1$s</string>
+    <string name="sure">确定</string>
+    <string name="cancle">取消</string>
+    <string name="delete">删除</string>
+
+    <string name="title_deleting_library">正在删除 %1$s</string>
+    <string name="title_delete_library_success">删除成功</string>
+    <string name="title_delete_library_failed">删除失败</string>
+    <string name="title_downloading_library">正在下载 %1$s</string>
+    <string name="title_download_library_success">下载成功</string>
+    <string name="title_download_library_failed">下载失败</string>
+    <string name="complete">完成</string>
+    <string name="open">打开</string>
+    <string name="downloaded">&#160;%s %%</string>
+
+
 </resources>

@@ -32,10 +32,10 @@ public class WordDataBase {
             //addColumn(SQLiteType.INTEGER, Library_Table.isSelected.getNameAlias().getName());
 
             /**v = 6*/
-            addColumn(SQLiteType.INTEGER, Library_Table.countFam.getNameAlias().getName());
-            addColumn(SQLiteType.INTEGER, Library_Table.countNoFam.getNameAlias().getName());
-            addColumn(SQLiteType.INTEGER, Library_Table.countNoKnown.getNameAlias().getName());
-            addColumn(SQLiteType.INTEGER, Library_Table.countNoRead.getNameAlias().getName());
+            addColumn(SQLiteType.INTEGER, Library_Table.countFam.getNameAlias().name());
+            addColumn(SQLiteType.INTEGER, Library_Table.countNoFam.getNameAlias().name());
+            addColumn(SQLiteType.INTEGER, Library_Table.countNoKnown.getNameAlias().name());
+            addColumn(SQLiteType.INTEGER, Library_Table.countNoRead.getNameAlias().name());
         }
     }
 }

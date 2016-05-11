@@ -9,4 +9,6 @@
 
     <dimen name="defalut_txNum_textSize">14sp</dimen>
     <dimen name="defalut_txLable_textSize">14sp</dimen>
+
+    <dimen name="common_height">40dp</dimen>
 </resources>

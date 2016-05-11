@@ -5,6 +5,8 @@ import android.database.Cursor;
 
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
+import com.raizlabs.android.dbflow.annotation.ForeignKeyAction;
+import com.raizlabs.android.dbflow.annotation.NotNull;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
@@ -25,26 +27,29 @@ public class Word extends BaseModel {
 
     /**原单词*/
     @Column
+    @NotNull
     public String word;
 
     /**音标*/
     @Column
+    @NotNull
     public String phonogram;
 
 
     /**中文解释*/
     @Column
+    @NotNull
     public String paraphrase;
 
     /**熟悉程度 1代表熟悉；2代表不熟悉；3代表很不熟悉，0代表没读过*/
-    @Column
-    public int familiarity;
+    @Column(defaultValue = "0")
+    public int familiarity = 0;
 
     /**最后阅读时间*/
     @Column
     public Long lastReadTime ;
 
-    @ForeignKey
+    @ForeignKey(saveForeignKeyModel = true)
     public Library library;
 
     public Long getId() {

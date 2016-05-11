@@ -1,5 +1,7 @@
 package tzy.qrecitewords.javabean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.BoolRes;
 
 import com.raizlabs.android.dbflow.annotation.Column;
@@ -21,7 +23,12 @@ import tzy.qrecitewords.dataUtils.dbutils.WordDataBase;
  */
 @ModelContainer
 @Table(database = WordDataBase.class)
-public class Library extends BaseModel {
+public class Library extends BaseModel implements Parcelable {
+
+    public interface IsExist{
+        int exist = 1;
+        int noExist = 0;
+    }
 
     /**
      * 熟悉程度
@@ -47,9 +54,10 @@ public class Library extends BaseModel {
     public String libraryName;
 
     @Column
+    @NotNull
     public String introdu;//介绍信息
 
-    @Column
+    @Column(defaultValue = "0")
     //**0代表不存在，1代表存在*/
     public int isExist;
 
@@ -69,7 +77,51 @@ public class Library extends BaseModel {
     @Column(defaultValue = "0")
     int countNoFam;//有点陌生的单词的数量
 
-    int countOfTotal;//所有单词数
+    int countOfTotal = 0;//所有单词数
+
+    protected Library(Parcel in) {
+        libraryName = in.readString();
+        introdu = in.readString();
+        isExist = in.readInt();
+        createdTime = in.readLong();
+        isSelected = in.readByte() != 0;
+        countNoRead = in.readInt();
+        countNoKnown = in.readInt();
+        countFam = in.readInt();
+        countNoFam = in.readInt();
+        countOfTotal = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(libraryName);
+        dest.writeString(introdu);
+        dest.writeInt(isExist);
+        dest.writeLong(createdTime);
+        dest.writeByte((byte) (isSelected ? 1 : 0));
+        dest.writeInt(countNoRead);
+        dest.writeInt(countNoKnown);
+        dest.writeInt(countFam);
+        dest.writeInt(countNoFam);
+        dest.writeInt(countOfTotal);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Library> CREATOR = new Creator<Library>() {
+        @Override
+        public Library createFromParcel(Parcel in) {
+            return new Library(in);
+        }
+
+        @Override
+        public Library[] newArray(int size) {
+            return new Library[size];
+        }
+    };
 
     public Long getId() {
         return id;
@@ -162,6 +214,38 @@ public class Library extends BaseModel {
 
     public void setCountNoKnown(int countNoKnown) {
         this.countNoKnown = countNoKnown;
+    }
+
+    public void changeFamility(int oldFam,int newFam){
+        switch(oldFam){
+            case Library.Familiarity.familary:
+                --countFam;
+                break;
+            case Library.Familiarity.nofamilary:
+                --countNoFam;
+                break;
+            case Library.Familiarity.noknown:
+                --countNoKnown;
+                break;
+            case Library.Familiarity.noRead:
+                --countNoRead;
+                break;
+        }
+
+        switch(newFam){
+            case Library.Familiarity.familary:
+                ++countFam;
+                break;
+            case Library.Familiarity.nofamilary:
+                ++countNoFam;
+                break;
+            case Library.Familiarity.noknown:
+                ++countNoKnown;
+                break;
+            case Library.Familiarity.noRead:
+                ++countNoRead;
+                break;
+        }
     }
 
     @Override

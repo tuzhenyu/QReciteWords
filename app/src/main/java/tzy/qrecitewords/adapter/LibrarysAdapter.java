@@ -38,7 +38,7 @@ public class LibrarysAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Library getItem(int position) {
         return libraries.get(position);
     }
 
@@ -65,9 +65,10 @@ public class LibrarysAdapter extends BaseAdapter {
             viewHodler = (ViewHodler) convertView.getTag();
         }
         viewHodler.library = library;
+
         viewHodler.textViewLibrary.setText(library.getIntrodu());
         ListView listView = (ListView) parent;
-        if(listView.getCheckedItemPosition() == position) {
+        if(library.getIsExist() == Library.IsExist.exist && library.isSelected()) {
             viewHodler.selectorIcon.setVisibility(View.VISIBLE);
             viewHodler.selectorIcon.setText("查看");
             viewHodler.context = context;

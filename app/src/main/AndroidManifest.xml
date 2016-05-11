@@ -28,6 +28,11 @@
         </activity>
 
         <activity android:name=".widget.ReciteWordsActivity"></activity>
+        <service android:name=".serivce.LibraryDownLoadService">
+            <intent-filter>
+                <action android:name="com.tzy.downloadLibrary"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

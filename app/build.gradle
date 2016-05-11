@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
-def dbflow_version = "3.0.0-beta4"
+def dbflow_version = "develop-SNAPSHOT"
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
@@ -50,4 +50,5 @@ dependencies {
     //compile project(':tapbarmenu')
 
 
+    compile project(path: ':ColorDialog')
 }
