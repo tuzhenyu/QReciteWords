@@ -52,7 +52,7 @@ public class ProgressBn extends FrameLayout  {
         textView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isComplete() && textClickListener != null){
+                if( textClickListener != null){
                     textClickListener.onClick(v);
                 }
             }

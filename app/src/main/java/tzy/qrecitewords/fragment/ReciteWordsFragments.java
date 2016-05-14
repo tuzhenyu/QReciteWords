@@ -82,8 +82,7 @@ public class ReciteWordsFragments extends BaseFragment  {
         if(library == null){
             libraryInfoView.setTxLibraryNameNull();
         }else{
-            library.setCountOfTotal(library.getCountFam() + library.getCountNoRead() + library.getCountNoKnown() + library.getCountNoFam());
-            libraryInfoView.setTxLibraryName(library.getIntrodu(),library.getCountOfTotal());
+            libraryInfoView.setLibraryInfo(library);
         }
 
         MissionOfDay missionOfDay = MissionService.queryTodayMission(new Date(System.currentTimeMillis()));

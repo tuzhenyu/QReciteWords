@@ -94,9 +94,8 @@ public abstract class DoubleCachePresenter<D> {
     }
 
     /**数据处理*/
-    public void dataDealFromNet(D data, Runnable run){
-        run.run();
-    }
+
+    public abstract void dataDealFromNet(D data);
 
     /**net*/
     public  void preRequestMore(){}
@@ -115,12 +114,7 @@ public abstract class DoubleCachePresenter<D> {
         GsonRequest<D> request = new GsonRequest<D>(Request.Method.GET, req, dClass, new Response.Listener<D>() {
             @Override
             public void onResponse(final D d) {
-                 dataDealFromNet(d, new Runnable() {
-                    @Override
-                    public void run() {
-                        postRequestDataFromNet(d,null);
-                    }
-                });
+                 dataDealFromNet(d);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -143,12 +137,7 @@ public abstract class DoubleCachePresenter<D> {
         GsonRequest<D> request = new GsonRequest<D>(Request.Method.POST, req, dClass,para, new Response.Listener<D>() {
             @Override
             public void onResponse(final D d) {
-                dataDealFromNet(d, new Runnable() {
-                    @Override
-                    public void run() {
-                        postRequestDataFromNet(d,null);
-                    }
-                });
+                dataDealFromNet(d);
             }
         }, new Response.ErrorListener() {
             @Override

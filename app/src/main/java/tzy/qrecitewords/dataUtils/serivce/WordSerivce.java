@@ -1,11 +1,19 @@
 package tzy.qrecitewords.dataUtils.serivce;
 
 import android.support.annotation.BoolRes;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.raizlabs.android.dbflow.annotation.provider.Notify;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.sql.language.CursorResult;
+import com.raizlabs.android.dbflow.sql.language.Method;
+import com.raizlabs.android.dbflow.sql.language.OrderBy;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 import com.raizlabs.android.dbflow.structure.database.transaction.ITransaction;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
+import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
 import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 
 import java.sql.SQLDataException;
@@ -16,45 +24,12 @@ import tzy.qrecitewords.dataUtils.dbutils.WordDataBase;
 import tzy.qrecitewords.javabean.Library;
 import tzy.qrecitewords.javabean.LibraryInfo;
 import tzy.qrecitewords.javabean.Word;
+import tzy.qrecitewords.javabean.Word_Table;
 
 /**
  * Created by tzy on 2016/5/7.
  */
 public class WordSerivce {
-
-    /**
-     * 查询词库信息
-     */
-    public static LibraryInfo getLibraryInfo(final Library library,final ResultLisenter<LibraryInfo> lisenter) {
-
-        /*SQLite.select(Word_Table.familiarity, Method.count(Word_Table.id))
-                .from(Word.class)
-                .where(Word_Table.library_id.eq(library.getId()))
-                .groupBy(Word_Table.familiarity)
-                .async()
-                .query(new TransactionListener<Cursor>() {
-                    @Override
-                    public void onResultReceived(Cursor result) {
-                        LibraryInfo info = LibraryInfo.CursorToLibraryInfo(library.getIntrodu(),result);
-                        lisenter.reviceResult(info);
-                    }
-
-                    @Override
-                    public boolean onReady(BaseTransaction<Cursor> transaction) {
-                        return transaction.onReady();
-                    }
-
-                    @Override
-                    public boolean hasResult(BaseTransaction<Cursor> transaction, Cursor result) {
-                        if(result != null )
-                            return true;
-                        else
-                            return false;
-                    }
-                });*/
-
-        return null;
-    }
 
     /**更改单词熟悉度
      * @param word 单词
@@ -102,10 +77,15 @@ public class WordSerivce {
                 if(info.getWords() == null || info.getWords().size() <= 0){
                     throw new IllegalArgumentException("该词库没有单词");
                 }
+                library.setNull();
                 library.setCountNoRead(info.getWords().size());
                 library.setIsExist(Library.IsExist.exist);
                 library.setSelected(false);
-                library.insert();
+                if(library.getLibraryName() != null){
+                    library.update();
+                }else{
+                    library.insert();
+                }
 
                 List<Word> words = info.getWords();
                 for(Word word: words){
@@ -122,4 +102,13 @@ public class WordSerivce {
         }
     }
 
+    public static void queryWordsFromLibrary(final Library library, QueryTransaction.QueryResultCallback<Word> resultCallback){
+        SQLite.select()
+                .from(Word.class)
+                .where(Word_Table.library_libraryName.eq(library.getLibraryName()))
+                .orderBy(OrderBy.fromString("LOWER(" + "word" + ") ASC"))
+                .async()
+                .queryResultCallback(resultCallback)
+                .execute();
+    }
 }

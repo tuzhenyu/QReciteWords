@@ -45,12 +45,12 @@ public class Library extends BaseModel implements Parcelable {
     }
 
 
-    @PrimaryKey(autoincrement = true)
-    public Long id;
+    /*@PrimaryKey(autoincrement = true)
+    public Long _id;*/
 
     @Column
     @NotNull
-    @Unique
+    @PrimaryKey
     public String libraryName;
 
     @Column
@@ -123,13 +123,13 @@ public class Library extends BaseModel implements Parcelable {
         }
     };
 
-    public Long getId() {
-        return id;
+    /*public Long get_id() {
+        return _id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void set_id(Long id) {
+        this._id = id;
+    }*/
 
     public String getIntrodu() {
         return introdu;
@@ -185,7 +185,7 @@ public class Library extends BaseModel implements Parcelable {
     }
 
     public int getCountOfTotal() {
-        return countOfTotal;
+        return getCountFam() + getCountNoFam() + getCountNoKnown() + getCountNoRead();
     }
 
     public void setCountOfTotal(int countOfTotal) {
@@ -256,11 +256,27 @@ public class Library extends BaseModel implements Parcelable {
 
         if(o instanceof Library){
             Library rValue = (Library) o;
-            if(this.id == rValue.id){return true;}
+
             if(this.getLibraryName().equals(((Library) o).getLibraryName())){
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean hasWords(){
+        if(isExist == IsExist.exist && getCountOfTotal() > 0){
+            return true;
+        }
+        return false;
+    }
+
+    public void setNull(){
+        countNoKnown = 0;
+        countNoFam = 0;
+        countNoRead = 0;
+        countFam = 0;
+        isExist = IsExist.noExist;
+        isSelected  = false;
     }
 }

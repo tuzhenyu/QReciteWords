@@ -18,7 +18,7 @@ import tzy.qrecitewords.dataUtils.dbutils.WordDataBase;
 public class MissionOfDay extends BaseModel {
 
     @PrimaryKey(autoincrement = true)
-    Long id;
+    Long _id;
 
     @Column
     @Unique
@@ -32,11 +32,11 @@ public class MissionOfDay extends BaseModel {
     int countOfLearned;//今日已学的单词的数量
 
     public Long getId() {
-        return id;
+        return _id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void set_id(Long id) {
+        this._id= id;
     }
 
     public Date getDate() {

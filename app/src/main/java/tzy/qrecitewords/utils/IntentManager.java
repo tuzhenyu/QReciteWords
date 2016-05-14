@@ -1,9 +1,12 @@
 package tzy.qrecitewords.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import tzy.qrecitewords.LibraryWordsActivity;
+import tzy.qrecitewords.javabean.Library;
 import tzy.qrecitewords.widget.ReciteWordsActivity;
 
 /**
@@ -19,5 +22,11 @@ public class IntentManager {
      }
      context.startActivity(intent);
 
+    }
+
+    public static void intentToLibraryDetails(Context context){
+        Intent intent = new Intent(context, LibraryWordsActivity.class);
+        context.startActivity(intent);
+        ((Activity)context).overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 }

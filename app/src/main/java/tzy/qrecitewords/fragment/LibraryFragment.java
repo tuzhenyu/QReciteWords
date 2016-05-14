@@ -15,11 +15,16 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.melnykov.fab.FloatingActionButton;
+import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 
+import java.security.PublicKey;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import cn.refactor.lib.colordialog.ColorDialog;
+import cn.refactor.lib.colordialog.PromptDialog;
 import tzy.qrecitewords.MainActivity;
 import tzy.qrecitewords.R;
 import tzy.qrecitewords.adapter.LibrarysAdapter;
@@ -29,8 +34,8 @@ import tzy.qrecitewords.javabean.Library;
 import tzy.qrecitewords.net.DoubleCacheIView;
 import tzy.qrecitewords.net.DoubleCachePresenter;
 import tzy.qrecitewords.net.UrlValue;
-import tzy.qrecitewords.serivce.LibraryDownLoadService;
 import tzy.qrecitewords.utils.DownLoadManager;
+import tzy.qrecitewords.utils.IntentManager;
 import tzy.qrecitewords.widget.LibraryInfoView;
 import tzy.qrecitewords.widget.ProgressBn;
 
@@ -77,10 +82,10 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
         floatingActionButton = (FloatingActionButton) view.findViewById(R.id.fab);
         listView = (ListView) view.findViewById(R.id.listView);
         listView.setOnItemClickListener(this);
+        listView.setOnItemLongClickListener(this);
         libraryInfoView = (LibraryInfoView) view.findViewById(R.id.library_info_view);
         libraryInfoView.setTxLibraryNameNull();
         rquestData();
-        listView.setOnItemClickListener(this);
         floatingActionButton.attachToListView(listView);
     }
 
@@ -135,12 +140,14 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
         }
         Intent intent = new Intent();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(LibraryDownLoadService.action_download_porgress);
+        intentFilter.addAction(DownLoadManager.DownLoadTask.action_download_porgress);
+        intentFilter.addAction(DownLoadManager.DownLoadTask.action_store_complete);
+        intentFilter.addAction(DownLoadManager.DownLoadTask.action_download_complete);
         getActivity().registerReceiver(receiver,intentFilter);
     }
 
     public void unRegisterReceiver(){
-        if(receiver == null){
+        if(receiver != null){
             getActivity().unregisterReceiver(receiver);
         }
     }
@@ -172,7 +179,7 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
        presenter.itemLongClick(parent,view,position,id);
-            return false;
+            return true;
     }
 
     @Override
@@ -244,6 +251,18 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
         }else{
             librarysAdapter.setLibraries(data.getLibraries());
         }
+
+        boolean hasSelect = false;
+        for(Library library : data.getLibraries()){//
+            if(library.isSelected()){
+                libraryInfoView.setLibraryInfo(library);
+                hasSelect = true;
+                break;
+            }
+        }
+        if(!hasSelect){
+            libraryInfoView.setTxLibraryNameNull();
+        }
     }
 
     @Override
@@ -256,15 +275,10 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
 
     }
 
-
-    public void showLibraryInfo(Library info){
-        libraryInfoView.setTxLibraryNameNull();//先清楚清除之前的状态
-        libraryInfoView.setTxLibraryName(info.getIntrodu(),info.getCountOfTotal());
-        libraryInfoView.setWlableFam(info.getCountFam()+ "");
-        libraryInfoView.setWlableNofam(info.getCountNoFam()+ "");
-        libraryInfoView.setWlableNoknown(info.getCountNoKnown()+ "");
-        libraryInfoView.setWlableNoread(info.getCountNoRead() + "");
+    public void notifyDataSetChanged(){
+        librarysAdapter.notifyDataSetChanged();
     }
+
 
 
     @Override
@@ -279,16 +293,34 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
      * */
     public static class Presenter extends DoubleCachePresenter<Libraries>{
 
-        Set<Library> mLibraries;
+        List<Library> mLibraries;
 
-        ColorDialog dialog;
+        ColorDialog mDialog;
+
+        ColorDialog downLoadDialog;
 
         ProgressBn progressBn;
 
         DownLoadManager downLoadManager;
+
         public Presenter(DoubleCacheIView<Libraries> iView, RequestQueue queue) {
             super(iView, queue,LoadType.CACHE);
-            mLibraries = new HashSet<>();
+            mLibraries = new ArrayList<>();
+        }
+
+        public void changeLibrary(Library oldLibr,Library newLibr){
+            if(LibrarySerivce.changLibrary(oldLibr,newLibr)){
+                if(oldLibr != null){
+                    mLibraries.remove(oldLibr);
+                    mLibraries.add(oldLibr);
+                }
+                mLibraries.remove(newLibr);
+                mLibraries.add(newLibr);
+
+                LibraryFragment fragment = (LibraryFragment) getIView();
+                fragment.libraryInfoView.setLibraryInfo(newLibr);
+                fragment.notifyDataSetChanged();
+            }
         }
 
         @Override
@@ -298,26 +330,40 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
 
         public void itemClick(AdapterView<?> parent, View view, int position, long id){
             Library library = (Library) parent.getAdapter().getItem(position);
-            if(library.getIsExist() == Library.IsExist.exist){
-                intoLibraryDetails(library);
+            if(library.hasWords()){
+                if(library.isSelected()){
+                    dropSelectedLibrary(library);
+                }else{
+                    Library oldLibr = LibrarySerivce.getSelectedLbrary();
+                    changeLibrary(oldLibr,library);
+                }
+
             }else{
                 downLoadLibrary(library);
             }
         }
 
-        public void intoLibraryDetails(Library library){
+        public void dropSelectedLibrary(Library library){
+            library.setSelected(false);
+            library.update();
+            LibraryFragment fragment = (LibraryFragment) getIView();
+            fragment.libraryInfoView.setTxLibraryNameNull();
+            fragment.notifyDataSetChanged();
+        }
 
+        public void intoLibraryDetails(Library library){
+           IntentManager.intentToLibraryDetails(getContext());
         }
 
         public void downLoadLibrary(final Library library){
            final LibraryFragment fragment = (LibraryFragment) getIView();
-            dialog = fragment.getAskForDownLoadDialog(library.getIntrodu(),new ColorDialog.OnPositiveListener() {
+            mDialog = fragment.getAskForDownLoadDialog(library.getIntrodu(),new ColorDialog.OnPositiveListener() {
                @Override
                public void onClick(ColorDialog dialog) {
                    dialog.dismiss();
 
-                   progressBn = getPorgressBn();
-                   dialog = fragment.getDownLoadDialog(library.getIntrodu(), new ColorDialog.OnNegativeListener() {
+                   progressBn = getInitPorgressBn();
+                   downLoadDialog = fragment.getDownLoadDialog(library.getIntrodu(), new ColorDialog.OnNegativeListener() {
 
                        @Override
                        public void onClick(ColorDialog dialog) {
@@ -327,11 +373,11 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
                        @Override
                        public void onDismiss(DialogInterface dialog) {
                            downLoadManager.cancleDownLoad();
-                       }
+                   }
                    });
 
-                   dialog.show();
-                   dialog.setCcontentView(progressBn);
+                   downLoadDialog.show();
+                   downLoadDialog.setCcontentView(progressBn);
                    if(downLoadManager == null){
                        downLoadManager  = new DownLoadManager(getContext());
                    }
@@ -343,23 +389,24 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
                    dialog.dismiss();
                }
            });
-            dialog.setAnimationEnable(true);
-            dialog.show();
+            mDialog.setAnimationEnable(true);
+            mDialog.show();
         }
 
         public void itemLongClick(AdapterView<?> parent, View view, int position, long id){
             Library library = (Library) parent.getAdapter().getItem(position);
             if(library.getIsExist() == Library.IsExist.exist){
-                deleteLibrary(library);
+                onDeleteLibrary(library);
             }
         }
 
-        public void deleteLibrary(Library library){
+        public void onDeleteLibrary(final Library library){
             LibraryFragment fragment = (LibraryFragment) getIView();
-             dialog = fragment.getAskForDeleteDialog(library.getIntrodu(),new ColorDialog.OnPositiveListener() {
+             mDialog = fragment.getAskForDeleteDialog(library.getIntrodu(),new ColorDialog.OnPositiveListener() {
                 @Override
                 public void onClick(ColorDialog dialog) {
                     dialog.dismiss();
+                    deleteLibrary(library);
                 }
             }, new ColorDialog.OnNegativeListener() {
                 @Override
@@ -367,10 +414,73 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
                     dialog.dismiss();
                 }
             });
-            dialog.setAnimationEnable(true);
-            dialog.show();
+            mDialog.setAnimationEnable(true);
+            mDialog.show();
         }
 
+        public void deleteLibrary(final Library library){
+
+            final ColorDialog dDialog = new ColorDialog(getContext());
+            dDialog.setTitle("删除词库");
+            dDialog.setContentText("正在删除 "+ library.getIntrodu()+" ...");
+            dDialog.setCanceledOnTouchOutside(false);
+            dDialog.setCancelable(false);
+            dDialog.show();
+
+            LibrarySerivce.deleteTableAsync(library, new Transaction.Success() {
+                @Override
+                public void onSuccess(Transaction transaction) {
+                    dDialog.dismiss();
+                    LibraryFragment fragment = (LibraryFragment) getIView();
+                    fragment.notifyDataSetChanged();
+                    checkLibraryInfo(mLibraries);
+
+                    PromptDialog pialog = new PromptDialog(getContext());
+                    pialog.setContentText("删除成功");
+                    pialog.setDialogType(PromptDialog.DIALOG_TYPE_SUCCESS);
+                    pialog.setCanceledOnTouchOutside(true);
+                    pialog.setPositiveListener(R.string.sure, new PromptDialog.OnPositiveListener() {
+                        @Override
+                        public void onClick(PromptDialog dialog) {
+                            dialog.dismiss();
+                        }
+                    });
+                    pialog.show();
+                }
+            }, new Transaction.Error() {
+                @Override
+                public void onError(Transaction transaction, Throwable error) {
+                    dDialog.dismiss();
+                    PromptDialog pialog = new PromptDialog(getContext());
+                    pialog.setContentText("删除失败");
+                    pialog.setDialogType(PromptDialog.DIALOG_TYPE_WRONG);
+                    pialog.setPositiveListener(R.string.cancle, new PromptDialog.OnPositiveListener() {
+                        @Override
+                        public void onClick(PromptDialog dialog) {
+                          dialog.dismiss();
+                        }
+                    });
+                    pialog.show();
+                }
+            });
+        }
+
+        public void checkLibraryInfo(List<Library> datas){
+            LibraryFragment fragment = (LibraryFragment) getIView();
+            boolean hasSelect = false;
+            //
+            for(Library library : datas)
+                if (library.isSelected()) {
+
+                    fragment.libraryInfoView.setLibraryInfo(library);
+                    hasSelect = true;
+                    break;
+                }
+            if(!hasSelect){
+                fragment.libraryInfoView.setTxLibraryNameNull();
+            }
+        }
+         /*----------------数据加载方法-----*/
         @Override
         public void loadLocalData() {
             Libraries libraries = LibrarySerivce.getLibrariesLocal();
@@ -382,13 +492,6 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
             mLibraries.clear();
             mLibraries.addAll(data.getLibraries());
 
-            for(Library library : data.getLibraries()){//
-                if(library.isSelected()){
-                    LibraryFragment libraryFragment = (LibraryFragment) getIView();
-                    libraryFragment.showLibraryInfo(library);
-                    break;
-                }
-            }
             super.postLocalData(data);
         }
 
@@ -404,49 +507,77 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
         }
 
         @Override
-        public void dataDealFromNet(Libraries data, Runnable run) {
+        public void dataDealFromNet(Libraries data) {
             if(data == null || data.getLibraries() == null){return;}
-            Set<Library> nDatas = new HashSet<>(data.getLibraries());
-            nDatas.addAll(mLibraries);//新旧数据的结合
-            mLibraries.clear();
-            mLibraries = null;
-            mLibraries = nDatas;
-            Libraries libraries = new Libraries();
-            super.dataDealFromNet(libraries, run);
+
+            List<Library> librFromNet = data.getLibraries();
+            librFromNet.removeAll(mLibraries);
+
+            mLibraries.addAll(data.getLibraries());
+
+            data.setLibraries(mLibraries);
+
+            postRequestDataFromNet(data,null);
         }
 
-        public ProgressBn getPorgressBn(){
+        public ProgressBn getProgressBn() {
+            return progressBn;
+        }
+
+        public void setProgressBn(ProgressBn progressBn) {
+            this.progressBn = progressBn;
+        }
+
+        public ProgressBn getInitPorgressBn(){
                 progressBn = new ProgressBn(getContext());
                 progressBn.setProgressText("下载中...");
                 progressBn.setOnCompletedListener(completedListener);
-                progressBn.setTextClickListener(textClickListener);
                 return progressBn;
         }
-
-        View.OnClickListener textClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        };
 
         ProgressBn.OnCompletedListener completedListener = new ProgressBn.OnCompletedListener() {
             @Override
             public void onComplete(int porgress) {
-
+                progressBn.setProgressText(R.string.complete);
             }
         };
 
         public void updateProgress(int porgress){
             progressBn.setProgress(porgress);
         }
+
+        public void cancleDialog() {
+            if(downLoadDialog != null){
+                downLoadDialog.dismiss();
+            }
+        }
+
     }
 
     public class ProgressReceiver extends BroadcastReceiver{
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            presenter.updateProgress(intent.getIntExtra(LibraryDownLoadService.PAR_PROGRESS,0));
+            if(intent.getAction().equals(DownLoadManager.DownLoadTask.action_download_porgress)){
+                presenter.updateProgress(intent.getIntExtra(DownLoadManager.DownLoadTask.PAR_PROGRESS,0));
+            }else if(intent.getAction().equals(DownLoadManager.DownLoadTask.action_download_complete)){
+                ProgressBn progressBn = presenter.getProgressBn();
+                progressBn.setProgressText(R.string.complete);
+            }else if(intent.getAction().equals(DownLoadManager.DownLoadTask.action_store_complete)){
+                final Library library = intent.getParcelableExtra(DownLoadManager.DownLoadTask.PAR_LIBRARY);
+                final ProgressBn progressBn = presenter.getProgressBn();
+                progressBn.setProgressText(R.string.open);
+                progressBn.setTextClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        presenter.cancleDialog();
+                        Library oldLirb = LibrarySerivce.getSelectedLbrary();
+                        presenter.changeLibrary(oldLirb,library);
+
+                        presenter.intoLibraryDetails(library);
+                    }
+                });
+            }
         }
     }
 }

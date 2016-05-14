@@ -4,7 +4,13 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
+import com.raizlabs.android.dbflow.structure.database.transaction.ITransaction;
+
+import tzy.qrecitewords.dataUtils.dbutils.WordDataBase;
 import tzy.qrecitewords.dataUtils.words_utils.TableInfo;
+import tzy.qrecitewords.javabean.Library;
 
 /**
  * Created by tzy on 2016/1/8.
@@ -67,5 +73,22 @@ public class SQLiteHelper extends SQLiteOpenHelper{
         db.execSQL(sql.toString());
     }
 
+    public static boolean TransactionSubmit(ITransaction transaction){
+        Boolean trTag = false;
+        DatabaseWrapper wrapper = FlowManager.getDatabase(WordDataBase.class).getWritableDatabase();
+        try {
+            wrapper.beginTransaction();
+            transaction.execute(wrapper);
+            wrapper.setTransactionSuccessful();
+            trTag = true;
+        }catch (Exception e){
+            trTag = false;
+        }
+        finally {
+            wrapper.endTransaction();
+        }
+
+        return trTag;
+    }
 
 }

@@ -17,6 +17,7 @@ import java.util.List;
 import tzy.qrecitewords.LibraryWordsActivity;
 import tzy.qrecitewords.R;
 import tzy.qrecitewords.javabean.Library;
+import tzy.qrecitewords.utils.IntentManager;
 
 /**
  * Created by tzy on 2016/2/24.
@@ -108,10 +109,7 @@ public class LibrarysAdapter extends BaseAdapter {
         public Context context;
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(context, LibraryWordsActivity.class);
-            context.startActivity(intent);
-            // this.getActivity().overridePendingTransition(R.anim.activity_in_anim,R.anim.activity_out_anim);
-            ((Activity)context).overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+            IntentManager.intentToLibraryDetails(context);
         }
         }
 }

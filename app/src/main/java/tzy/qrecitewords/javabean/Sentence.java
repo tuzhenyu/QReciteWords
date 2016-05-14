@@ -19,7 +19,7 @@ import tzy.qrecitewords.dataUtils.dbutils.WordDataBase;
 public class Sentence extends BaseModel {
 
     @PrimaryKey(autoincrement = true)
-    public Long id;
+    public Long _id;
 
     @Column
     public String content;
@@ -30,12 +30,12 @@ public class Sentence extends BaseModel {
     public Sentence() {
     }
 
-    public Long getId() {
-        return id;
+    public Long get_id() {
+        return _id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this._id = id;
     }
 
     public String getContent() {

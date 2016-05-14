@@ -54,7 +54,7 @@
     <string name="title_downloading_library">正在下载 %1$s</string>
     <string name="title_download_library_success">下载成功</string>
     <string name="title_download_library_failed">下载失败</string>
-    <string name="complete">完成</string>
+    <string name="complete">下载完成，正在处理</string>
     <string name="open">打开</string>
     <string name="downloaded">&#160;%s %%</string>
 

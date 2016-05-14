@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import tzy.qrecitewords.R;
+import tzy.qrecitewords.javabean.Library;
 
 /**
  * Created by tzy on 2016/4/11.
@@ -80,5 +81,14 @@ public class LibraryInfoView extends LinearLayout {
         wlableFam.setLNumText("0");
         wlableNofam.setLNumText("0");
         wlableNoknown.setLNumText("0");
+    }
+
+    public void setLibraryInfo(Library info){
+        setTxLibraryNameNull();//先清楚清除之前的状态
+        setTxLibraryName(info.getIntrodu(),info.getCountOfTotal());
+        setWlableFam(info.getCountFam()+ "");
+        setWlableNofam(info.getCountNoFam()+ "");
+        setWlableNoknown(info.getCountNoKnown()+ "");
+        setWlableNoread(info.getCountNoRead() + "");
     }
 }
