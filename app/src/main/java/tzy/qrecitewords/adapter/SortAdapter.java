@@ -84,49 +84,14 @@ public class SortAdapter extends CursorAdapter implements SectionIndexer  {
 		}else {
 			viewHolder.textViewTtile.setVisibility(View.GONE);
 		}
+		viewHolder.textViewExpaliation.setText(viewHolder.word.getParaphrase());
 		viewHolder.textViewWord.setText(viewHolder.word.getWord());
 	}
-
-	/*@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		
-		ViewHolder viewHolder = null;
-		final Word mContent = list.get(position);
-		if (convertView== null) {
-			viewHolder = new ViewHolder();
-			convertView = LayoutInflater.from(mContext).inflate(R.layout.item_words, null);
-			viewHolder.textViewWord = (TextView) convertView.findViewById(R.id.textView_word);
-			viewHolder.textViewExpaliation = (TextView) convertView.findViewById(R.id.textView_expliation);
-			viewHolder.textViewTtile =  (TextView) convertView.findViewById(R.id.catalog);
-			convertView.setTag(viewHolder);
-		}else {
-			viewHolder = (ViewHolder) convertView.getTag();
-		}
-		//如果当前位置等于该分类首字母的Char的位置 ，则认为是第一次出现
-		if (position == isLetterShowPosition(position)) {
-			viewHolder.textViewTtile.setVisibility(View.VISIBLE);
-			viewHolder.textViewTtile.setText(String.valueOf(getAlpha(mContent.getWord())));
-		}else {
-			viewHolder.textViewTtile.setVisibility(View.GONE);
-		}
-		viewHolder.textViewWord.setText(this.list.get(position).getWord());
-		return convertView;
-	}*/
 
 	@Override
 	public Object[] getSections() {
 		return null;
 	}
-
-	/**
-	 * 根据分类的首字母的Char ascii值获取其第一次出现该首字母的位置
-	 */
-/*	@Override
-	public int getPositionForSection(int c) {
-
-		Integer position = map.get(getUpChar((char) c),-1);
-		return position;
-	}*/
 
 	@Override
 	public int getPositionForSection(int sectionIndex) {
@@ -158,18 +123,5 @@ public class SortAdapter extends CursorAdapter implements SectionIndexer  {
 	}
 
 	SparseArray<Integer> map;
-	/*int isLetterShowPosition(int position){
-		char firstLetter= getAlpha(list.get(position).getWord());
-		Integer letterPos = map.get(firstLetter,-1);
-		if(letterPos != -1)
-			return letterPos;
-		map.put(firstLetter, position);
-		return position;
-	}*/
 
-	/*public char getUpChar(char c) {
-		if(c >= 65 && c <= 90) return c;
-		if(c >= 97 && c <= 122) return (char) (c-32);
-		return '#';
-	}*/
 }

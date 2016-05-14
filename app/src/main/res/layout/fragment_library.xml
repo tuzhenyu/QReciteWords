@@ -21,9 +21,12 @@
         android:id="@+id/listView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:dividerHeight="8dp"
+        android:dividerHeight="1dp"
         android:padding="8dp"
-        android:background="@color/whitesmoke"
+        android:divider="@color/seagreen_t"
+        android:headerDividersEnabled="true"
+        android:footerDividersEnabled="true"
+        android:background="@color/white"
         />
 
 </LinearLayout>

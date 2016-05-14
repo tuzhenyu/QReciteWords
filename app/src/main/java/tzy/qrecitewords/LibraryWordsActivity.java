@@ -46,8 +46,6 @@ public class LibraryWordsActivity  extends AppCompatActivity {
 
     private Presenter presenter;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

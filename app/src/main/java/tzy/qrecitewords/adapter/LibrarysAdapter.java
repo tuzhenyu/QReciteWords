@@ -60,6 +60,7 @@ public class LibrarysAdapter extends BaseAdapter {
             viewHodler.textViewLibrary = (TextView) convertView.findViewById(R.id.textView_libraryName);
             viewHodler.selectorIcon = (TextView)convertView.findViewById(R.id.imageView_selector_icon);
             viewHodler.selectedText = (TextView)convertView.findViewById(R.id.text_selected);
+            viewHodler.txCount = (TextView)convertView.findViewById(R.id.tx_count);
             convertView.setTag(viewHodler);
 
         }else{
@@ -78,6 +79,13 @@ public class LibrarysAdapter extends BaseAdapter {
         } else{
             viewHodler.selectedText.setVisibility(View.GONE);
             viewHodler.selectorIcon.setVisibility(View.GONE);
+        }
+
+        if(library.hasWords()){
+            viewHodler.txCount.setText(context.getString(R.string.word_count,library.getCountOfTotal()));
+            viewHodler.txCount.setVisibility(View.VISIBLE);
+        }else{
+            viewHodler.txCount.setVisibility(View.GONE);
         }
 
         return convertView;
@@ -106,6 +114,7 @@ public class LibrarysAdapter extends BaseAdapter {
         public TextView textViewLibrary;
         public TextView selectorIcon;
         public TextView selectedText;
+        public TextView txCount;
         public Context context;
         @Override
         public void onClick(View v) {

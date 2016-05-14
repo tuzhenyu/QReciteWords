@@ -14,4 +14,6 @@ public class DataBaseConfigure {
     public static final String DATA_BASE_SEFC = "table_SEFC";//高中英语
     public static final String DATA_BASE_JEFC = "table_JEFC";//初中英语
 
+    public static final String DATA_TABLE_MissionOfDay = "MissionOfDay";
+
 }

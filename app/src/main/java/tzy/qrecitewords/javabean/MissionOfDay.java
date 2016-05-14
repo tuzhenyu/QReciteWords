@@ -20,10 +20,11 @@ public class MissionOfDay extends BaseModel {
     @PrimaryKey(autoincrement = true)
     Long _id;
 
+
     @Column
     @Unique
     @NotNull
-    Date date;
+    String date;//yyyy-mm-dd
 
     @Column
     int todayWords;//今日要学的单词的数量
@@ -39,11 +40,11 @@ public class MissionOfDay extends BaseModel {
         this._id= id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

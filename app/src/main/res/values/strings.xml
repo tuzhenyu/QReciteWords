@@ -58,5 +58,5 @@
     <string name="open">打开</string>
     <string name="downloaded">&#160;%s %%</string>
 
-
+    <string name="word_count">单词数量：%1$s</string>
 </resources>

@@ -3,8 +3,10 @@ package tzy.qrecitewords.javabean;
 import android.database.Cursor;
 
 import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.annotation.Unique;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.sql.Date;
@@ -25,7 +27,9 @@ public class Sentence extends BaseModel {
     public String content;
 
     @Column
-    public Long date;
+    @Unique
+    @NotNull
+    String date;//yyyy-mm-dd
 
     public Sentence() {
     }
@@ -46,11 +50,11 @@ public class Sentence extends BaseModel {
         this.content = content;
     }
 
-    public Long getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Long date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -58,7 +62,7 @@ public class Sentence extends BaseModel {
 
         Sentence sentence = new Sentence();
         sentence.setContent(cursor.getString(1));
-        sentence.setDate(cursor.getLong(2));
+        sentence.setDate(cursor.getString(2));
         return sentence;
     }
 }

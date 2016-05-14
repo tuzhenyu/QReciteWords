@@ -2,16 +2,17 @@
 <tzy.qrecitewords.widget.CheckableLibraryItem
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     cardview:cardElevation="2dp"
     cardview:cardCornerRadius="2dp"
     >
 <RelativeLayout
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
     android:duplicateParentState="true"
+    android:background="@color/white"
     >
     <TextView
         android:id="@+id/textView_libraryName"
@@ -20,9 +21,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:text="四级词库"
-        android:textSize="28sp"
-        android:layout_centerVertical="true"
+        android:textSize="20sp"
         android:textColor="@drawable/selector_library_text_item"
+        android:layout_alignParentTop="true"
+        />
+
+    <TextView
+        android:id="@+id/tx_count"
+        android:textSize="14sp"
+        android:textColor="@color/seagreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/textView_libraryName"
         />
 
     <TextView
@@ -30,11 +41,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/librar_selected_remind"
-        android:layout_below="@id/textView_libraryName"
+        android:layout_below="@id/tx_count"
         android:textColor="@color/material_blue_500"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="6dp"
         android:textSize="16sp"
         android:visibility="gone"
+
         />
 
     <TextView
@@ -44,10 +56,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_alignBottom="@id/textView_libraryName"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:text="@string/see"
-        android:textColor="@color/lightblue"
+        android:textColor="@color/seagreen"
         />
 </RelativeLayout>
 </tzy.qrecitewords.widget.CheckableLibraryItem>
