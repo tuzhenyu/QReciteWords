@@ -137,7 +137,13 @@ public class WordLableView extends LinearLayout {
         this.txLable = txLable;
     }
 
+    public String getNumText(){
+       return txNum.getText().toString();
+    }
 
+    public String getLableText(){
+        return txLable.getText().toString();
+    }
     /**
      * 将px值转换为sp值，保证文字大小不变
      *

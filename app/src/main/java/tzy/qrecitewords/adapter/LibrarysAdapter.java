@@ -96,7 +96,6 @@ public class LibrarysAdapter extends BaseAdapter {
     }
 
     public void setLibraries(List<Library> libraries) {
-        if(this.libraries != null){this.libraries.clear();}
         this.libraries = libraries;
         notifyDataSetChanged();
     }
@@ -118,7 +117,7 @@ public class LibrarysAdapter extends BaseAdapter {
         public Context context;
         @Override
         public void onClick(View v) {
-            IntentManager.intentToLibraryDetails(context);
+            IntentManager.intentToLibraryDetails(context,library);
         }
         }
 }

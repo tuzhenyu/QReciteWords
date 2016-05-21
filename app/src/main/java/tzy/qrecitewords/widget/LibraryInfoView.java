@@ -3,6 +3,7 @@ package tzy.qrecitewords.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -44,13 +45,16 @@ public class LibraryInfoView extends LinearLayout {
         txLibraryName = (TextView) findViewById(R.id.tx_libraryName);
 
         wlableNoread = (WordLableView) findViewById(R.id.wlable_noread);
+        wlableNoread.setTag(Library.Familiarity.noRead);
 
         wlableFam = (WordLableView) findViewById(R.id.wlable_fam);
+        wlableFam.setTag(Library.Familiarity.familary);
 
         wlableNofam = (WordLableView) findViewById(R.id.wlable_nofam);
+        wlableNofam.setTag(Library.Familiarity.nofamilary);
 
         wlableNoknown = (WordLableView) findViewById(R.id.wlable_nokonwn);
-
+        wlableNoknown.setTag(Library.Familiarity.noknown);
     }
 
     public void setTxLibraryName(String libraryName,int countofWord){
@@ -90,5 +94,29 @@ public class LibraryInfoView extends LinearLayout {
         setWlableNofam(info.getCountNoFam()+ "");
         setWlableNoknown(info.getCountNoKnown()+ "");
         setWlableNoread(info.getCountNoRead() + "");
+    }
+
+    public void hideTitle(boolean hide){
+        if(hide){
+            txLibraryName.setVisibility(View.GONE);
+        }else{
+            txLibraryName.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setwlableNoreadListener(OnClickListener l){
+        wlableNoread.setOnClickListener(l);
+    }
+
+    public void setwlableFamListener(OnClickListener l){
+        wlableFam.setOnClickListener(l);
+    }
+
+    public void setwlableNofamListener(OnClickListener l){
+        wlableNofam.setOnClickListener(l);
+    }
+
+    public void setwlableNoknownListener(OnClickListener l){
+        wlableNoknown.setOnClickListener(l);
     }
 }

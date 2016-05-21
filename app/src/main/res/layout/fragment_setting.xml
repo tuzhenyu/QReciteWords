@@ -1,20 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/whitesmoke"
+    >
 
-    <Button
-        android:id="@+id/changeThemeBn"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="切换主题"
-        android:onClick="changeTheme"
-        />
+        >
+        <TextView
+            android:id="@+id/tx_mssion_set"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/gray"
+            android:background="@color/t_seagreen"
+            android:text="每日任务调整"
+            android:paddingLeft="18dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            />
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        <ImageView
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/right_point"
+            android:id="@+id/imageView" />
+
+    </RelativeLayout>
+    <include layout="@layout/line"/>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/t_seagreen"
+        >
+        <TextView
+            android:id="@+id/tx_learn_admire"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/gray"
+            android:text="学习提醒设置"
+            android:paddingLeft="18dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:layout_centerVertical="true"
+            />
+
+        <Switch
+            android:id="@+id/learn_reminder_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            />
+
+    </RelativeLayout>
+    <include layout="@layout/line"/>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        >
+        <TextView
+            android:id="@+id/tx_clear_sen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/gray"
+            android:background="@color/t_seagreen"
+            android:text="清除例句缓存"
+            android:paddingLeft="18dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            />
+
+        <ImageView
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/right_point"
+            />
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+
+
+    <!--<RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:id="@+id/tx_service_push"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/gray"
+            android:background="@color/t_seagreen"
+            android:text="qingchu"
+            android:paddingLeft="18dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            />
+
+        <Switch
+            android:id="@+id/push_reminder_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            />
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>-->
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        >
+        <TextView
+            android:id="@+id/tx_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/gray"
+            android:background="@color/t_seagreen"
+            android:text="关于"
+            android:paddingLeft="18dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            />
+
+        <ImageView
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/right_point"
+            />
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:id="@+id/tx_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/gray"
+            android:background="@color/t_seagreen"
+            android:text="检查更新"
+            android:paddingLeft="18dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            />
+
+        <ImageView
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/right_point"
+            />
+
+    </RelativeLayout>
 
 </LinearLayout>

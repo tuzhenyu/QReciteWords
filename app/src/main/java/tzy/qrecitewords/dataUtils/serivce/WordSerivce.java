@@ -1,5 +1,7 @@
 package tzy.qrecitewords.dataUtils.serivce;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.support.annotation.BoolRes;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -10,12 +12,14 @@ import com.raizlabs.android.dbflow.sql.language.CursorResult;
 import com.raizlabs.android.dbflow.sql.language.Method;
 import com.raizlabs.android.dbflow.sql.language.OrderBy;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
+import com.raizlabs.android.dbflow.sql.language.Select;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 import com.raizlabs.android.dbflow.structure.database.transaction.ITransaction;
 import com.raizlabs.android.dbflow.structure.database.transaction.ProcessModelTransaction;
 import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
 import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 
+import java.sql.Date;
 import java.sql.SQLDataException;
 import java.util.List;
 
@@ -23,6 +27,7 @@ import tzy.qrecitewords.dataUtils.dbutils.ResultLisenter;
 import tzy.qrecitewords.dataUtils.dbutils.WordDataBase;
 import tzy.qrecitewords.javabean.Library;
 import tzy.qrecitewords.javabean.LibraryInfo;
+import tzy.qrecitewords.javabean.Library_Table;
 import tzy.qrecitewords.javabean.Word;
 import tzy.qrecitewords.javabean.Word_Table;
 
@@ -110,5 +115,54 @@ public class WordSerivce {
                 .async()
                 .queryResultCallback(resultCallback)
                 .execute();
+    }
+
+    public static void getWordsToRecited( Library library, int famility, int limit, QueryTransaction.QueryResultListCallback<Word> callback){
+         new Select().from(Word.class)
+                        .where(Word_Table.library_libraryName.eq(library.getLibraryName()))
+                        .and(Word_Table.familiarity.eq(famility))
+                        .limit(limit)
+                        .async()
+                        .queryListResultCallback(callback)
+                        .execute();
+    }
+
+    public static List<Word> getWordsToRecited(Library library,int famility,int limit){
+        List<Word> list = new Select().from(Word.class)
+                .where(Word_Table.library_libraryName.eq(library.getLibraryName()))
+                .and(Word_Table.familiarity.eq(famility))
+                .limit(limit)
+                .queryList();
+        return list;
+    }
+
+    public static boolean tranFamOfWord(final Word word, final int famliarity, Transaction.Success success, Transaction.Error error){
+
+        ITransaction iTransaction = new ITransaction() {
+            @Override
+            public void execute(DatabaseWrapper databaseWrapper) {
+                int oldFam = word.getFamiliarity();
+
+                if(word.changeFamlility(famliarity)){
+                    Library library = new Select().from(Library.class)
+                            .where(Library_Table.libraryName.eq(word.getLibrary().getLibraryName()))
+                            .querySingle();
+                    library.changeFamility(oldFam,famliarity);
+                    word.setLibrary(library);
+                    word.setLastReadDate(new Date(System.currentTimeMillis()).toString());
+                    word.update();
+                 }
+                 MissionService.increProMissionOfDay(1,null);
+            }
+        };
+
+        FlowManager.getDatabase(WordDataBase.class)
+                .beginTransactionAsync(iTransaction)
+                .error(error)
+                .success(success)
+                .build()
+                .executeSync();
+
+        return true;
     }
 }

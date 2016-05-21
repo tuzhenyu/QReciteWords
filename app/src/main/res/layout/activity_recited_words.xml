@@ -2,145 +2,148 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/khaki"
     >
 
-    <LinearLayout
-        android:id="@+id/bottom_layout"
-        android:layout_width="fill_parent"
+
+    <TextView
+        android:id="@+id/tx_next"
+        android:textSize="28sp"
+        android:text="下一个"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:background="@color/seagreen"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/bottom_chose_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
         >
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textSize="18sp"
-            android:text="返回"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:background="@drawable/shape_white_rectangle"
-            android:textColor="@color/white"
-            />
-
-        <TextView
+            android:id="@+id/txTranToFam"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="18sp"
             android:layout_weight="1.0"
             android:text="@string/word_lable_fam"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:background="@drawable/shape_white_rectangle"
-            android:textColor="@color/white"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="@color/seagreen_t"
+            android:textColor="@color/seagreen"
+            android:layout_marginBottom="2dp"
             />
 
         <TextView
+            android:id="@+id/txTranToNoFam"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="18sp"
             android:text="@string/word_lable_nofam"
             android:layout_weight="1.0"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:background="@drawable/shape_white_rectangle"
-            android:textColor="@color/white"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="@color/seagreen_t"
+            android:textColor="@color/seagreen"
+            android:layout_marginBottom="2dp"
             />
 
         <TextView
+            android:id="@+id/txTranToNoKnown"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="18sp"
             android:text="@string/word_lable_unknown"
             android:layout_weight="1.0"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:textColor="@color/white"
-            android:background="@drawable/shape_white_rectangle"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:textColor="@color/seagreen"
+            android:background="@color/seagreen_t"
+            android:layout_marginBottom="2dp"
             />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/chose_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="320dp"
-        android:orientation="vertical"
-        android:layout_above="@id/bottom_layout"
-        >
-
-        <include layout="@layout/line_layout" />
-
-        <TextView
-            android:id="@+id/tx_choseA"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:textSize="18sp"
-            android:textColor="@color/green"
-            android:text="选项A。。。。。。。"
-            android:layout_weight="1.0"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:paddingLeft="16dp"
-            />
-
-        <TextView
-            android:id="@+id/tx_choseB"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:textSize="18sp"
-            android:textColor="@color/green"
-            android:text="选项A。。。。。。。"
-            android:layout_weight="1.0"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:paddingLeft="16dp"
-            />
-
-        <TextView
-            android:id="@+id/tx_choseC"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:textSize="18sp"
-            android:textColor="@color/green"
-            android:text="选项A。。。。。。。"
-            android:layout_weight="1.0"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:paddingLeft="16dp"
-            />
-
-        <TextView
-            android:id="@+id/tx_choseD"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:textSize="18sp"
-            android:textColor="@color/green"
-            android:text="选项A。。。。。。。"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:layout_weight="1.0"
-            android:paddingLeft="16dp"
-            />
-
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/tx_word"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="34sp"
-        android:textColor="@color/yellow"
-        android:textStyle="bold"
-        android:text="Chinese"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@id/chose_layout"
+  <tzy.qrecitewords.widget.ProgressBn
+        android:id="@+id/progressbn"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
         android:layout_alignParentTop="true"
-        android:gravity="center_vertical"
-        />
+      />
+
+  <LinearLayout
+      android:id="@+id/word_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center_vertical"
+      android:layout_below="@id/progressbn"
+      android:orientation="horizontal"
+      android:layout_margin="4dp"
+      android:paddingLeft="16dp"
+      android:paddingTop="8dp"
+      android:paddingRight="16dp"
+      android:paddingBottom="8dp"
+      android:background="@color/seagreen_t"
+      >
+      <TextView
+          android:id="@+id/tx_word"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="26sp"
+          android:textColor="@color/seagreen"
+          android:textStyle="bold"
+          android:text="Chinese"
+          android:singleLine="true"
+          android:ellipsize="marquee"
+          android:layout_centerHorizontal="true"
+          android:layout_marginRight="8dp"
+          />
+
+      <TextView
+          android:id="@+id/tx_phon"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="20sp"
+          android:textColor="@color/darkslateblue"
+          android:text="Chinese"
+          android:ellipsize="marquee"
+          />
+
+  </LinearLayout>
+
+  <TextView
+      android:id="@+id/tx_pharse"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textSize="23sp"
+      android:layout_below="@id/word_layout"
+      android:layout_marginLeft="4dp"
+      android:layout_marginRight="4dp"
+      android:textColor="@color/seagreen"
+      android:paddingLeft="16dp"
+      android:paddingTop="8dp"
+      android:paddingBottom="8dp"
+      android:paddingRight="8dp"
+      android:background="@color/seagreen_t"
+      android:visibility="gone"
+      />
+
+
 
 </RelativeLayout>

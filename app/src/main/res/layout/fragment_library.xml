@@ -32,10 +32,13 @@
 </LinearLayout>
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
+        style="@style/Widget.Design.FloatingActionButton"
+        android:src="@drawable/ic_add_white_24dp"
+        android:background="@drawable/shape_word_num"
          />
 
 </android.support.design.widget.CoordinatorLayout>

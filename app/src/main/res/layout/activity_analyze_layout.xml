@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/anal_text_title"
+        android:layout_width="248dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:background="@color/seagreen"
+        android:layout_alignParentTop="true"
+        android:padding="8dp"
+        android:layout_marginTop="24dp"
+        android:text="每日单词量分析"
+        android:paddingLeft="16dp"
+        />
+
+    <lecho.lib.hellocharts.view.ColumnChartView
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/anal_text_title"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="20dp"
+        >
+    </lecho.lib.hellocharts.view.ColumnChartView>
+
+</RelativeLayout>

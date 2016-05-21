@@ -11,9 +11,12 @@ import com.raizlabs.android.dbflow.sql.migration.AlterTableMigration;
 import com.raizlabs.android.dbflow.structure.ModelAdapter;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 
+import tzy.qrecitewords.javabean.LearnAlarmSetting;
+import tzy.qrecitewords.javabean.LearnAlarmSetting_Table;
 import tzy.qrecitewords.javabean.Library;
 import tzy.qrecitewords.javabean.Library_Table;
 import tzy.qrecitewords.javabean.Word;
+import tzy.qrecitewords.javabean.Word_Table;
 
 /**
  * Created by tzy on 2016/4/8.
@@ -23,9 +26,9 @@ public class WordDataBase {
     //数据库名称
     public static final String NAME = "AppDatabase";
     //数据库版本号
-    public static final int VERSION = 7;
+    public static final int VERSION = 14;
 
-    @Migration(version = WordDataBase.VERSION,database = WordDataBase.class)
+    @Migration(version = 6,database = WordDataBase.class)
     public static  class Migration_Library extends AlterTableMigration<Library>{
 
         public Migration_Library(Class<Library> table) {
@@ -46,7 +49,7 @@ public class WordDataBase {
         }
     }
 
-    @Migration(version = WordDataBase.VERSION,database = WordDataBase.class)
+    @Migration(version = VERSION,database = WordDataBase.class)
     public static  class Migration_Delete extends AlterTableMigration<Library>{
 
         public Migration_Delete(Class<Library> table) {
@@ -56,7 +59,48 @@ public class WordDataBase {
         @Override
         public void onPreMigrate() {
             super.onPreMigrate();
-            //6
+            //
+            addColumn(SQLiteType.INTEGER, Library_Table.isCustom.getNameAlias().name());
+        }
+    }
+
+    @Migration(version = 10,database = WordDataBase.class)
+    public static class Migration_LearnAlarmSetting extends AlterTableMigration<LearnAlarmSetting>{
+
+        public Migration_LearnAlarmSetting(Class<LearnAlarmSetting> table) {
+            super(table);
+        }
+
+
+        @Override
+        public void onPreMigrate() {
+            super.onPreMigrate();
+            //9
+           // addColumn(SQLiteType.INTEGER, LearnAlarmSetting_Table.hour.getNameAlias().name());
+           // addColumn(SQLiteType.INTEGER, LearnAlarmSetting_Table.minute.getNameAlias().name());
+           // addColumn(SQLiteType.INTEGER, LearnAlarmSetting_Table.isOpen.getNameAlias().name());
+        }
+    }
+
+    @Migration(version = VERSION,database = WordDataBase.class)
+    public static class Migration_Word extends AlterTableMigration<Word>{
+
+        public Migration_Word(Class<Word> table) {
+            super(table);
+        }
+
+
+        @Override
+        public void onPreMigrate() {
+            super.onPreMigrate();
+            //11
+             //addColumn(SQLiteType.TEXT, Word_Table.lastReadDate.getNameAlias().name());
+            //13
+        }
+
+        @Override
+        public void onPostMigrate() {
+            super.onPostMigrate();
         }
     }
 }

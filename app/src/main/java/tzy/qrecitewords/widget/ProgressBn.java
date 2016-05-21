@@ -134,4 +134,12 @@ public class ProgressBn extends FrameLayout  {
     public void setOnCompletedListener(OnCompletedListener completedListener) {
         mCompletedListener = completedListener;
     }
+
+    public int getProgress(){
+      return   progressBar.getProgress();
+    }
+
+    public int getMax(){
+        return progressBar.getMax();
+    }
 }

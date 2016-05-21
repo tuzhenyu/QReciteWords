@@ -36,7 +36,6 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     android:orientation="vertical"
-    tools:context="com.tzy.mytoolbar_04.MainActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
@@ -102,8 +101,8 @@
         android:id="@+id/tl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="#FF00FF00"
-        app:tabSelectedTextColor="#FF00FF00"
+        app:tabIndicatorColor="@color/seagreen"
+        app:tabSelectedTextColor="@color/seagreen"
         app:tabTextColor="#FF000000"
         app:tabMode="scrollable"
         app:tabGravity="center"/>

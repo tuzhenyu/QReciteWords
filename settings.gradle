@@ -1,1 +1,1 @@
-include ':app', ':greendao_lib', ':ColorDialog'
+include ':app', ':greendao_lib', ':ColorDialog', ':hellocharts-library'

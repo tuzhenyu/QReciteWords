@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 def dbflow_version = "develop-SNAPSHOT"
+
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
@@ -34,13 +35,9 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-
     testCompile 'junit:junit:4.12'
-
-    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
     compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
-
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'me.neavo:volley:2014.12.09'
     compile 'com.google.code.gson:gson:2.2.4'
@@ -48,7 +45,7 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     compile 'com.melnykov:floatingactionbutton:1.3.0'
     //compile project(':tapbarmenu')
-
-
     compile project(path: ':ColorDialog')
+    compile project(':hellocharts-library')
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
 }

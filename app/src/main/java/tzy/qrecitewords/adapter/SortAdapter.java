@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AlphabetIndexer;
 import android.widget.BaseAdapter;
 import android.widget.CursorAdapter;
+import android.widget.Filter;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
@@ -40,6 +41,15 @@ public class SortAdapter extends CursorAdapter implements SectionIndexer  {
 		notifyDataSetChanged();
 	}
 	*/
+
+	/**
+	 * 解决界面回复后alphabetIndexer没能及时更新Cursor的问题
+	 * */
+	@Override
+	public Cursor swapCursor(Cursor newCursor) {
+		alphabetIndexer.setCursor(newCursor);
+		return super.swapCursor(newCursor);
+	}
 
 	@Override
 	public int getCount() {
@@ -122,6 +132,8 @@ public class SortAdapter extends CursorAdapter implements SectionIndexer  {
 		return '#';
 	}
 
-	SparseArray<Integer> map;
-
+	@Override
+	public Filter getFilter() {
+		return super.getFilter();
+	}
 }

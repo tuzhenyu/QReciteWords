@@ -3,16 +3,16 @@
     <!-- Base application theme. -->
     <style name="AppTheme.light" parent="AppTheme.Base">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@android:color/holo_blue_light</item>
-        <item name="colorPrimaryDark">@android:color/holo_blue_light</item>
+        <item name="colorPrimary">@color/seagreen</item>
+        <item name="colorPrimaryDark">@color/seagreen</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="AppTheme.drak" parent="AppTheme.Base">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@android:color/holo_blue_light</item>
-        <item name="colorPrimaryDark">@android:color/holo_blue_light</item>
+        <item name="colorPrimary">@color/seagreen</item>
+        <item name="colorPrimaryDark">@color/seagreen</item>
         <item name="android:windowBackground">@color/gray</item>
         <item name="android:textColor">@color/white</item>
     </style>

@@ -1,38 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!--<include layout="@layout/toolbar"/>-->
-<FrameLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
 
-    <ListView
-        android:id="@+id/listview_words"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:background="#4f808080"
-        android:alpha="80"
-        android:textStyle="italic"
-        android:padding="8dp"
-        android:visibility="invisible" />
+        <!--<include layout="@layout/toolbar"/>-->
 
-    <tzy.qrecitewords.widget.SideBar
-        android:id="@+id/sidrbar"
-        android:layout_width="32dp"
-        android:layout_height="fill_parent"
-        android:layout_gravity="right|center" />
-</FrameLayout>
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_margin="4dp"
+            android:queryHint="请输入单词..." />
 
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
 
-</LinearLayout>
+            <ListView
+                android:id="@+id/listview_words"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:alpha="80"
+                android:background="#4f808080"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                android:visibility="invisible" />
+
+            <tzy.qrecitewords.widget.SideBar
+                android:id="@+id/sidrbar"
+                android:layout_width="32dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="right|center" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab"
+        style="@style/Widget.Design.FloatingActionButton"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/shape_word_num"
+        android:layout_marginRight="28dp"
+        android:src="@drawable/ic_add_white_24dp" />
+</android.support.design.widget.CoordinatorLayout>

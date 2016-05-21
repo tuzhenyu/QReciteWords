@@ -64,8 +64,14 @@ public class LibrarySerivce {
                 SQLite.delete(Word.class)
                         .where(Word_Table.library_libraryName.eq(lname))
                         .execute();
-                library.setNull();
-                library.update();
+                if( !library.isCustom() ){//如果不是用户自己生产的
+                    library.setNull();
+                    library.update();
+                }else{
+                    library.delete();
+                }
+
+
             }
         };
 
@@ -79,5 +85,34 @@ public class LibrarySerivce {
                 .execute();
 
         return true;
+    }
+
+    public static Library createCustomerLibrary(String libraryName,String introdu){
+        Library library = new Library();
+        library.setLibraryName(libraryName);
+        library.setIntrodu(introdu);
+        library.setNull();
+        library.setIsExist(Library.IsExist.exist);
+        library.setCustom(true);
+        library.insert();
+
+        library = new Select().from(Library.class)
+                .where(Library_Table.libraryName.eq(libraryName))
+                .querySingle();
+        return library;
+    }
+
+    public static boolean addWord(final Library library, final Word word){
+
+        ITransaction transaction = new ITransaction() {
+            @Override
+            public void execute(DatabaseWrapper databaseWrapper) {
+                library.setCountNoRead(library.getCountNoRead() + 1);
+                word.setLibrary(library);
+                word.insert();
+            }
+        };
+
+        return SQLiteHelper.TransactionSubmit(transaction);
     }
 }

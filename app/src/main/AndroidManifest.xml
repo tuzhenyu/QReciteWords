@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/book_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme.light"
         android:name=".app.WordsApp"
@@ -27,12 +27,23 @@
         <activity android:name=".LibraryWordsActivity">
         </activity>
 
-        <activity android:name=".widget.ReciteWordsActivity"></activity>
+        <activity android:name=".ReciteWordsActivity"></activity>
+
+        <activity android:name=".MissionSettingActivity"></activity>
+
+        <activity android:name=".AnalyzeActivity"></activity>
         <service android:name=".serivce.LibraryDownLoadService">
             <intent-filter>
                 <action android:name="com.tzy.downloadLibrary"/>
             </intent-filter>
         </service>
+
+        <service android:name=".serivce.AlarmService">
+            <intent-filter>
+                <action android:name="action_learn_alarm"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

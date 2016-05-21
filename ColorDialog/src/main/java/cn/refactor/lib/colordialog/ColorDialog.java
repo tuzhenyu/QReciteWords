@@ -17,6 +17,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import cn.refactor.lib.colordialog.util.DisplayUtil;
@@ -49,7 +50,9 @@ public class ColorDialog extends Dialog implements View.OnClickListener {
 
     private CharSequence mTitleText, mContentText, mPositiveText, mNegativeText;
 
-    private boolean mIsShowAnim;
+    private boolean mIsShowAnim,isContentCenter;
+
+    private View nContentView;
 
     public ColorDialog(Context context) {
         this(context, 0);
@@ -60,6 +63,14 @@ public class ColorDialog extends Dialog implements View.OnClickListener {
         init();
     }
 
+    public boolean isContentCenter() {
+        return isContentCenter;
+    }
+
+    public void setContentCenter(boolean contentCenter) {
+        isContentCenter = contentCenter;
+    }
+
     private void callDismiss() {
         super.dismiss();
     }
@@ -68,6 +79,15 @@ public class ColorDialog extends Dialog implements View.OnClickListener {
         mAnimIn = AnimationLoader.getInAnimation(getContext());
         mAnimOut = AnimationLoader.getOutAnimation(getContext());
         initAnimListener();
+    }
+
+    public View getnContentView() {
+        return nContentView;
+    }
+
+    public ColorDialog setnContentView(View nContentView) {
+        this.nContentView = nContentView;
+        return this;
     }
 
     @Override
@@ -136,6 +156,20 @@ public class ColorDialog extends Dialog implements View.OnClickListener {
         setBackgroundColor();
 
         setContentMode();
+
+        if(isContentCenter){
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mBkgView.getLayoutParams();
+            layoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+            mBkgView.setLayoutParams(layoutParams);
+        }else{
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mBkgView.getLayoutParams();
+            layoutParams.gravity = Gravity.LEFT;
+            mBkgView.setLayoutParams(layoutParams);
+        }
+
+        if(nContentView != null){
+            setCcontentView(nContentView);
+        }
     }
 
     @Override

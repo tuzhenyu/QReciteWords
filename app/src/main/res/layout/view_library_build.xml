@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="204dp"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    >
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/ch_name_editorWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/ed_library_zh_name_input"
+            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/wheat"
+            android:hint="请输入词库的中文名"
+            android:textColor="@color/white"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/en_name_editorWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+      <EditText
+          android:id="@+id/ed_library_en_name_input"
+          android:textSize="15sp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColorHint="@color/wheat"
+          android:hint="请输入词库的英文名"
+          android:textColor="@color/white"
+          />
+    </android.support.design.widget.TextInputLayout>
+
+
+</LinearLayout>

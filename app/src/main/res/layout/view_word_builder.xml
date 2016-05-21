@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="224dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/word_editorWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/word_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入单词"
+            android:textColor="@color/white"
+            android:textColorHint="@color/wheat"
+            android:textSize="15sp" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/word_paraphrase_editorWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/word_paraphrase_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入注释"
+            android:textColor="@color/white"
+            android:textColorHint="@color/wheat"
+            android:textSize="15sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/word_phonogram_editorWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/word_phonogram_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入音标(选填)"
+            android:textColor="@color/white"
+            android:textColorHint="@color/wheat"
+            android:textSize="15sp" />
+    </android.support.design.widget.TextInputLayout>
+</LinearLayout>

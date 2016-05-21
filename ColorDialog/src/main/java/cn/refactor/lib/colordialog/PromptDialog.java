@@ -42,12 +42,12 @@ public class PromptDialog extends Dialog {
     private AnimationSet mAnimIn, mAnimOut;
     private View mDialogView;
     private TextView mTitleTv, mContentTv, mPositiveBtn;
+    private boolean isTitleShow = true;
     private OnPositiveListener mOnPositiveListener;
 
     private int mDialogType;
     private boolean mIsShowAnim;
     private CharSequence mTitle, mContent, mBtnText;
-
     public PromptDialog(Context context) {
         this(context, 0);
     }
@@ -109,6 +109,17 @@ public class PromptDialog extends Dialog {
         mTitleTv.setText(mTitle);
         mContentTv.setText(mContent);
         mPositiveBtn.setText(mBtnText);
+
+        setTitleVisiblity(isTitleShow);
+    }
+
+    public boolean isTitleShow() {
+        return isTitleShow;
+    }
+
+    public PromptDialog setTitleShow(boolean titleShow) {
+        isTitleShow = titleShow;
+        return this;
     }
 
     private void resizeDialog() {
@@ -314,6 +325,15 @@ public class PromptDialog extends Dialog {
     public PromptDialog setTitleText(CharSequence title) {
         mTitle = title;
         return this;
+    }
+
+    public void setTitleVisiblity(boolean visible){
+        if(visible){
+            mTitleTv.setVisibility(View.VISIBLE);
+        }else{
+            mTitleTv.setVisibility(View.GONE);
+        }
+
     }
 
     public PromptDialog setTitleText(int resId) {

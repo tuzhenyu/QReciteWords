@@ -47,12 +47,19 @@ public class Word extends BaseModel {
     @Column(defaultValue = "0")
     public int familiarity = 0;
 
-    /**最后阅读时间*/
-    @Column
-    public Long lastReadTime ;
-
     @ForeignKey(saveForeignKeyModel = true)
     public Library library;
+
+    @Column
+    String lastReadDate;//yyyy-mm-dd
+
+    public String getLastReadDate() {
+        return lastReadDate;
+    }
+
+    public void setLastReadDate(String lastReadDate) {
+        this.lastReadDate = lastReadDate;
+    }
 
     public Long get_id() {
         return _id;
@@ -60,10 +67,6 @@ public class Word extends BaseModel {
 
     public void set_id(Long _id) {
         this._id = _id;
-    }
-
-    public void setLastReadTime(Long lastReadTime) {
-        this.lastReadTime = lastReadTime;
     }
 
     public String getWord() {
@@ -98,14 +101,6 @@ public class Word extends BaseModel {
         this.familiarity = familiarity;
     }
 
-    public long getLastReadTime() {
-        return lastReadTime;
-    }
-
-    public void setLastReadTime(long lastReadTime) {
-        this.lastReadTime = lastReadTime;
-    }
-
     public Library getLibrary() {
         return library;
     }
@@ -113,6 +108,8 @@ public class Word extends BaseModel {
     public void setLibrary(Library library) {
         this.library = library;
     }
+
+
 
     public static List<Word> convertToList(Cursor cursor){
 
@@ -124,7 +121,6 @@ public class Word extends BaseModel {
             word.setPhonogram(cursor.getString(1));
             word.setParaphrase(cursor.getString(2));
             word.setFamiliarity(cursor.getInt(3));
-            word.setLastReadTime(cursor.getLong(4));
             words.add(word);
         }
         return words;
@@ -138,7 +134,6 @@ public class Word extends BaseModel {
         word.setPhonogram(cursor.getString(2));
         word.setParaphrase(cursor.getString(3));
         word.setFamiliarity(cursor.getInt(4));
-        word.setLastReadTime(cursor.getLong(5));
 
         return word;
     }
@@ -150,7 +145,6 @@ public class Word extends BaseModel {
         word.setPhonogram(cursor.getString(2));
         word.setParaphrase(cursor.getString(3));
         word.setFamiliarity(cursor.getInt(4));
-        word.setLastReadTime(cursor.getLong(5));
         return word;
     }
     public static int getPositionForSection(int sectionIndex){
@@ -211,4 +205,31 @@ public class Word extends BaseModel {
         }
         return 0;
     }
+
+    public boolean changeFamlility(int newFamility){
+        int oldFamility = familiarity;
+        if(newFamility == oldFamility){
+            return false;
+        }
+
+        switch(newFamility){
+            case Library.Familiarity.familary:
+                familiarity = newFamility;
+                return true;
+            case Library.Familiarity.nofamilary:
+                familiarity = newFamility;
+                return true;
+            case Library.Familiarity.noknown:
+                familiarity = newFamility;
+                return true;
+            case Library.Familiarity.noRead:
+                familiarity = newFamility;
+                return true;
+            default:
+                throw new IllegalArgumentException("词组类型不能为未定义类型");
+        }
+    }
+
+
+
 }

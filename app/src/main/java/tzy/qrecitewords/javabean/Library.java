@@ -79,6 +79,17 @@ public class Library extends BaseModel implements Parcelable {
 
     int countOfTotal = 0;//所有单词数
 
+    @Column(defaultValue = "false")
+    boolean isCustom;
+
+    public boolean isCustom() {
+        return isCustom;
+    }
+
+    public void setCustom(boolean custom) {
+        isCustom = custom;
+    }
+
     protected Library(Parcel in) {
         libraryName = in.readString();
         introdu = in.readString();
@@ -90,6 +101,7 @@ public class Library extends BaseModel implements Parcelable {
         countFam = in.readInt();
         countNoFam = in.readInt();
         countOfTotal = in.readInt();
+        isCustom = in.readByte() != 0;
     }
 
     @Override
@@ -104,6 +116,7 @@ public class Library extends BaseModel implements Parcelable {
         dest.writeInt(countFam);
         dest.writeInt(countNoFam);
         dest.writeInt(countOfTotal);
+        dest.writeByte((byte) (isCustom ? 1 : 0));
     }
 
     @Override
