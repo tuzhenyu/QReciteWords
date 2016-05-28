@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
@@ -166,8 +168,8 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
         }
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(DownLoadManager.DownLoadTask.action_download_porgress);
-        intentFilter.addAction(DownLoadManager.DownLoadTask.action_store_complete);
         intentFilter.addAction(DownLoadManager.DownLoadTask.action_download_complete);
+        intentFilter.addAction(DownLoadManager.DownLoadTask.action_store_complete);
         getActivity().registerReceiver(receiver,intentFilter);
     }
 
@@ -341,6 +343,44 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
 
         FlowContentObserver libraryObserver;
 
+        Handler handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                final LibraryFragment fragment = (LibraryFragment) getIView();
+                if(fragment == null){return;}
+                switch(msg.what){
+                    case 0://进度
+
+                       break;
+                    case 1://下载结果
+
+                        break;
+                    case 2://处理结果
+                        Bundle data = msg.getData();
+                        if(!data.getBoolean(DownLoadManager.DownLoadTask.SAVE_lIBRARY_SUCCESS,false)){
+                            Presenter.this.cancleDialog();
+                            fragment.showPromoteDialog("出错了","数据库异常",PromptDialog.DIALOG_TYPE_WRONG,null);
+                            return;
+                        }
+
+                        final Library library = data.getParcelable(DownLoadManager.DownLoadTask.PAR_LIBRARY);
+                        final ProgressBn progressBn = Presenter.this.getProgressBn();
+                        progressBn.setProgressText(R.string.open);
+                        progressBn.setTextClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Presenter.this.cancleDialog();
+                                Library oldLirb = LibrarySerivce.getSelectedLbrary();
+                                Presenter.this.changeLibrary(oldLirb,library);
+
+                                Presenter.this.intoLibraryDetails(library);
+                            }
+                        });
+                        break;
+                }
+            }
+        };
+
         //-----------------------libraryDataLisenter--------------------------------//
         public LoaderManager.LoaderCallbacks<Cursor> libraryCallBack = new LoaderManager.LoaderCallbacks<Cursor>() {
             @Override
@@ -473,7 +513,7 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
                    if(downLoadManager == null){
                        downLoadManager  = new DownLoadManager(getContext());
                    }
-                   downLoadManager.startDownLoad(library);
+                   downLoadManager.startDownLoad(library,handler);
                }
            }, new ColorDialog.OnNegativeListener() {
                @Override
@@ -599,8 +639,9 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
             List<Library> librFromNet = data.getLibraries();
             librFromNet.removeAll(mLibraries);
 
-            librFromNet.addAll(mLibraries);
-            data.setLibraries(librFromNet);
+            librFromNet.addAll(0,mLibraries);
+            mLibraries = librFromNet;
+            data.setLibraries(mLibraries);
 
             postRequestDataFromNet(data,null);
         }
@@ -653,7 +694,7 @@ public class LibraryFragment extends BaseFragment implements AdapterView.OnItemC
                         return;
                     }
                     Library library = LibrarySerivce.createCustomerLibrary(libr_znName,libr_chName);
-                    mLibraries.add(library);
+                    mLibraries.add(0,library);
                     Libraries libraries = new Libraries();
                     libraries.setLibraries(mLibraries);
                     fragment.showLocalData(libraries);

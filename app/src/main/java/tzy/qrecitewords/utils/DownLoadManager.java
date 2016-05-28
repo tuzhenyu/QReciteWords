@@ -2,6 +2,8 @@ package tzy.qrecitewords.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -52,13 +54,13 @@ public class DownLoadManager {
 
     ExecutorService executor;
 
-    public void startDownLoad(Library library) {
+    public void startDownLoad(Library library, android.os.Handler handler) {
         // Intent intent = new Intent(mContext,LibraryDownLoadService.class);
         // intent.setAction("com.tzy.downloadLibrary");
         // intent.putExtra(LibraryDownLoadService.PAR_LIBRARY,library);
         //mContext.startService(intent);
         ExecutorService executorService = getExecutorSerivce();
-        downLoadTask = new DownLoadTask(mContext, library);
+        downLoadTask = new DownLoadTask(mContext,library,handler);
         executorService.submit(downLoadTask);
     }
 
@@ -103,9 +105,12 @@ public class DownLoadManager {
 
         Library library;
 
-        public DownLoadTask(Context context, Library library) {
+        android.os.Handler mHandler;
+
+        public DownLoadTask(Context context, Library library,android.os.Handler handler) {
             this.contextWf = new WeakReference<Context>(context);
             this.library = library;
+            mHandler = handler;
         }
 
         @Override
@@ -187,12 +192,22 @@ public class DownLoadManager {
         }
 
         void sendStoreBroadcast(boolean isSuccess, Library library) {
-            Intent intentS = new Intent(action_store_complete);
+            if(mHandler != null){
+                Message msg = Message.obtain(mHandler,2);
+                Bundle bundle = new Bundle();
+                bundle.putBoolean(SAVE_lIBRARY_SUCCESS,isSuccess);
+                if (isSuccess) {
+                    bundle.putParcelable(PAR_LIBRARY, library);
+                }
+                msg.setData(bundle);
+                mHandler.sendMessage(msg);
+            }
+            /*Intent intentS = new Intent(action_store_complete);
             intentS.putExtra(SAVE_lIBRARY_SUCCESS, isSuccess);
             if (isSuccess) {
                 intentS.putExtra(PAR_LIBRARY, library);
             }
-            contextWf.get().sendBroadcast(intentS);
+            contextWf.get().sendBroadcast(intentS);*/
         }
 
         Intent mIntent;
