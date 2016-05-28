@@ -3,8 +3,9 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:background="@color/seaShell"
+    >
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -12,22 +13,9 @@
         android:orientation="vertical">
 
         <!--<include layout="@layout/toolbar"/>-->
-
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_margin="4dp"
-            android:queryHint="请输入单词..." />
-
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
-
-            <ListView
-                android:id="@+id/listview_words"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
 
             <TextView
                 android:id="@+id/dialog"
@@ -41,13 +29,24 @@
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="italic"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                />
+
+            <ListView
+                android:id="@+id/listview_words"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center" />
 
             <tzy.qrecitewords.widget.SideBar
                 android:id="@+id/sidrbar"
                 android:layout_width="32dp"
                 android:layout_height="fill_parent"
-                android:layout_gravity="right|center" />
+                android:layout_gravity="right|center"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                />
+
         </FrameLayout>
     </LinearLayout>
 

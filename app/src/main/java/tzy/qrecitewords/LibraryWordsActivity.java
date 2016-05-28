@@ -9,8 +9,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -55,8 +58,6 @@ public class LibraryWordsActivity  extends AppCompatActivity implements LoaderMa
 
     private Presenter presenter;
 
-    SearchView searchView;
-
     FloatingActionButton floatingActionButton;
 
     @Override
@@ -87,21 +88,6 @@ public class LibraryWordsActivity  extends AppCompatActivity implements LoaderMa
             }
         });
 
-        searchView = (SearchView) findViewById(R.id.searchView);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if(adapter != null){
-                    adapter.getFilter().filter(newText);
-                }
-                return false;
-            }
-        });
         presenter = new Presenter(this);
     }
     /**

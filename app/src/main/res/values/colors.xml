@@ -132,7 +132,7 @@
     <color name="darkslategray">#2f4f4f</color> <!-- 暗瓦灰色 -->
     <color name="darkslategrey">#2f4f4f</color> <!-- 暗瓦灰色 -->
     <color name="seagreen">#2e8b57</color> <!-- 海绿色 -->
-    <color name="seagreen_t">#342e8b57</color> <!-- 海绿色 -->
+    <color name="seagreen_t">#222e8b57</color> <!-- 海绿色 -->
     <color name="t_seagreen">#222e8b57</color>
     <color name="forestgreen">#228b22</color> <!-- 森林绿 -->
     <color name="lightseagreen">#20b2aa</color> <!-- 亮海蓝色 -->

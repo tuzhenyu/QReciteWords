@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import tzy.qrecitewords.R;
 import tzy.qrecitewords.dataUtils.serivce.LearnAlarmService;
 
 /**
@@ -24,7 +25,7 @@ public class AlarmService extends Service{
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(intent.getAction().equals(LearnAlarmService.action_learn_alarm)){
+
             //消息通知栏
             //定义NotificationManager
             NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -32,16 +33,16 @@ public class AlarmService extends Service{
             CharSequence tickerText = "快背单词";
             long when = System.currentTimeMillis();
             Notification notification = new Notification.Builder(this)
+                    .setSmallIcon(R.drawable.book_icon)
                     .setContentText(tickerText)
                     .setContentText(intent.getStringExtra(LearnAlarmService.para_alarm_mag))
                     .setTicker("背单词啦")
-                    .setAutoCancel(true)
                     .build();
 
             //定义下拉通知栏时要展现的内容信息
             //用mNotificationManager的notify方法通知用户生成标题栏消息通知
             mNotificationManager.notify(1, notification);
-        }
+
         return super.onStartCommand(intent, flags, startId);
     }
 

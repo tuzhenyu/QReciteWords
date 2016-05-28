@@ -203,7 +203,7 @@ public class Word extends BaseModel {
             case 'Z':
                 return 25;
         }
-        return 0;
+        return 25;
     }
 
     public boolean changeFamlility(int newFamility){

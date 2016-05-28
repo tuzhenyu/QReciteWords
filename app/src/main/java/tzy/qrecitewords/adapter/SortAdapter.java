@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import tzy.qrecitewords.R;
 import tzy.qrecitewords.javabean.Word;
+import tzy.qrecitewords.javabean.Word_Table;
 import tzy.qrecitewords.utils.UncaseAlphatIndexer;
 
 public class SortAdapter extends CursorAdapter implements SectionIndexer  {
@@ -96,6 +97,11 @@ public class SortAdapter extends CursorAdapter implements SectionIndexer  {
 		}
 		viewHolder.textViewExpaliation.setText(viewHolder.word.getParaphrase());
 		viewHolder.textViewWord.setText(viewHolder.word.getWord());
+	}
+
+	@Override
+	public CharSequence convertToString(Cursor cursor) {
+		return cursor.getString(1);
 	}
 
 	@Override

@@ -5,7 +5,7 @@ package tzy.qrecitewords.net;
  */
 public class UrlValue {
 
-    public static final String HOST = "10.10.114.22";
+    public static final String HOST = "119.29.152.23";
 
     public static final String port = ":8080";
 

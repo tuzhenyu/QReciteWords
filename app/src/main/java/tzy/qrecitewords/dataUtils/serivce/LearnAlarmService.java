@@ -94,8 +94,24 @@ public class LearnAlarmService  {
             calendar.set(Calendar.MINUTE,setting.getMinute());
 
             am.setRepeating(AlarmManager.RTC,
-                    calendar.getTimeInMillis(), 1000*3600*24l, sender);
+                    calendar.getTimeInMillis(), 1000*3600*24l, sender)
+            cancleAlarmBefore(context);
         }else{
+            am.cancel(sender);
+        }
+    }
+
+    public static void cancleAlarmBefore(Context context){
+        LearnAlarmSetting setting = new Select()
+                .from(LearnAlarmSetting.class)
+                .querySingle();
+        if(setting != null){
+            Intent intent = new Intent(context.getApplicationContext(), AlarmService.class);
+            intent.setAction(para_alarm_mag);
+            intent.putExtra(para_alarm_mag," 快背单词 提醒您：快来背单词咯！");
+            AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            PendingIntent sender = PendingIntent.getService(
+                    context.getApplicationContext(), 0, intent, 0);
             am.cancel(sender);
         }
     }

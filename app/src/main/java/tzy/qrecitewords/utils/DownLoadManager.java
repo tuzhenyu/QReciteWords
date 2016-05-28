@@ -96,7 +96,7 @@ public class DownLoadManager {
 
         public static final String action_download_porgress = "action_download_porgress";
         public static final String action_download_complete = "action_download_complete";
-        public static final String action_store_complete = "action_store_complete";
+        public static final String action_store_complete = "action_store_result";
         DatabaseWrapper wrapper = null;
 
         HttpURLConnection conn = null;
