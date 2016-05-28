@@ -203,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="32sp"
                 android:textColor="@color/white"
-                android:text="单词量测试"
+                android:text="单词量统计"
                 android:layout_centerInParent="true"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
