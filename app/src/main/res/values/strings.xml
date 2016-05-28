@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QReciteWords</string>
+    <string name="app_name">快背单词</string>
 
     <string name="title_library">词库</string>
     <string name="title_personal">个人中心</string>

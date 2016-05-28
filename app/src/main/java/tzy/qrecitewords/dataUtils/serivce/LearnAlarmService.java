@@ -94,7 +94,7 @@ public class LearnAlarmService  {
             calendar.set(Calendar.MINUTE,setting.getMinute());
 
             am.setRepeating(AlarmManager.RTC,
-                    calendar.getTimeInMillis(), 1000*3600*24l, sender)
+                    calendar.getTimeInMillis(), 1000*3600*24l, sender);
             cancleAlarmBefore(context);
         }else{
             am.cancel(sender);
